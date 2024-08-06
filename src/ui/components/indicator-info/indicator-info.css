@@ -1,0 +1,37 @@
+.indicator-info-wrapper {
+  align-items: center;
+  background-color: var(--pennant-hover-overlay);
+  cursor: default;
+  display: inline-flex;
+  flex-direction: row;
+  font-size: var(--pennant-font-size-base);
+  gap: 8px;
+  padding: 4px;
+  pointer-events: auto;
+  position: relative;
+  user-select: none;
+  z-index: 1;
+}
+
+.indicator-info__item {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.text-muted {
+  color: var(--pennant-font-color-secondary);
+}
+
+.monospace-text {
+  font-family: var(--pennant-font-family-monospace);
+  font-size: var(--pennant-font-size-monospace);
+  font-variant-numeric: tabular-nums;
+}
+
+.monospace-text.success {
+  color: var(--pennant-color-success);
+}
+
+.monospace-text.danger {
+  color: var(--pennant-color-danger);
+}

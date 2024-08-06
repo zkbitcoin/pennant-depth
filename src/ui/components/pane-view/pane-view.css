@@ -1,0 +1,113 @@
+.pane__close-button-wrapper {
+  margin-top: 4px;
+  margin-right: 8px;
+  position: absolute;
+  top: 0;
+  transition: opacity var(--pennant-transition-slow),
+    visibility var(--pennant-transition-slow);
+}
+
+.pane__close-button {
+  cursor: default;
+}
+
+.pane__chart {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.pane__info-overlay {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+.pane__pane {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.d3fc-group {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.plot-area {
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+}
+
+.plot-area-interaction {
+  cursor: crosshair;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.plot-area-annotations {
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+}
+
+.x-axis {
+  cursor: ew-resize;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.x-axis-interaction {
+  cursor: ew-resize;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.y-axis {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.y-axis-interaction {
+  cursor: ns-resize;
+  height: 100%;
+  position: absolute;
+  right: 0;
+}
+
+.d3fc-canvas-layer {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.annotation-layer {
+  height: 100%;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+}
+
+.crosshair {
+  cursor: crosshair;
+}
+
+.grabbing {
+  cursor: grabbing;
+}
+
+.time-axis {
+  height: 26px;
+  width: 100%;
+}

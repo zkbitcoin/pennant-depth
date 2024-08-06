@@ -1,0 +1,137 @@
+.annotation {
+  align-items: stretch;
+  background-color: var(--pennant-background-surface-color);
+  border-color: var(--pennant-color-gray-500);
+  border-style: solid;
+  border-width: 2px;
+  color: var(--pennant-font-color-base);
+  cursor: default;
+  display: inline-flex;
+  flex-direction: row;
+  font-size: var(--pennant-font-size-annotation);
+  user-select: none;
+}
+
+.cell {
+  border-right-style: solid;
+  border-right-width: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 4px;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cell.numeric {
+  font-family: var(--pennant-font-family-monospace);
+}
+
+.annotation.intent-primary {
+  border-color: var(--pennant-color-info);
+}
+
+.annotation.intent-primary > .cell {
+  border-color: var(--pennant-color-info);
+}
+
+.annotation.intent-primary > .cell.fill {
+  background-color: var(--pennant-color-info);
+  color: var(--pennant-color-black);
+}
+
+.annotation.intent-success {
+  border-color: var(--pennant-color-success);
+}
+
+.annotation.intent-success > .cell {
+  border-color: var(--pennant-color-success);
+}
+
+.annotation.intent-success > .cell.fill {
+  background-color: var(--pennant-color-success);
+  color: var(--pennant-color-black);
+}
+
+.annotation.intent-success > .cell.stroke {
+  color: var(--pennant-color-success);
+}
+
+.annotation.intent-danger {
+  border-color: var(--pennant-color-danger);
+}
+
+.annotation.intent-danger > .cell {
+  border-color: var(--pennant-color-danger);
+}
+
+.annotation.intent-danger > .cell.fill {
+  background-color: var(--pennant-color-danger);
+  color: var(--pennant-color-black);
+}
+
+.annotation.intent-danger > .cell.stroke {
+  color: var(--pennant-color-danger);
+}
+
+.cell > button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.cell > button.action {
+  color: var(--pennant-cont-color-base);
+}
+
+.cell:last-child {
+  border-right: none;
+}
+
+.annotation > .cell.stroke.cell-intent-danger {
+  color: var(--pennant-color-danger);
+}
+
+.annotation > .cell.stroke.cell-intent-none {
+  color: var(--pennant-color-white);
+}
+
+.annotation > .cell.stroke.cell-intent-success {
+  color: var(--pennant-color-success);
+}
+
+.spinner-head {
+  stroke: #8a9ba8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.2s cubic-bezier(0.4, 1, 0.75, 0.9);
+  transform-origin: center;
+}
+
+.spinner-track {
+  stroke: var(--pennant-background-surface-color);
+}
+
+.spinner-animation {
+  animation: spinner-animation 0.5s linear infinite;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 14px;
+}
+
+.no-spin {
+  animation: none;
+}
+
+@keyframes spinner-animation {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

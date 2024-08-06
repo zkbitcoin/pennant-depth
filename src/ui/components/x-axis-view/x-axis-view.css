@@ -1,0 +1,16 @@
+.x-axis-container {
+  height: 24px;
+  position: relative;
+}
+
+.x-axis-container::before {
+  height: 1px;
+  width: 100%;
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  pointer-events: none;
+  background-color: var(--separator-border);
+}

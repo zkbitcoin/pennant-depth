@@ -1,0 +1,13 @@
+.chart-info-wrapper {
+  align-items: center;
+  background-color: var(--pennant-hover-overlay);
+  cursor: default;
+  display: inline-flex;
+  flex-direction: row;
+  gap: 8px;
+  padding: 4px;
+  pointer-events: auto;
+  position: relative;
+  user-select: none;
+  z-index: 1;
+}
