@@ -132,7 +132,7 @@ export class UI extends EventEmitter {
   private sellOverlay: Rect = new Rect(0x0, OVERLAY_OPACITY);
 
   private midMarketPriceLabel: MidMarketPriceLabel;
-  private midPriceLine: VerticalLine = new VerticalLine(1, 0x494949);
+  private midPriceLine: VerticalLine = new VerticalLine(1, 0xdedede);
 
   private separator: HorizontalLine = new HorizontalLine(1, 0x494949);
 
