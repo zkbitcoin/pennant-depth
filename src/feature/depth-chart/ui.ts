@@ -46,6 +46,11 @@ function pointer(event: any) {
   ];
 }
 
+function fRound(str: string) {
+  str = str.replace(',', '');
+  return parseFloat(str);
+}
+
 export class Gesture {
   public that: UI;
   public active: number = 0;
@@ -551,8 +556,9 @@ export class UI extends EventEmitter {
           sellNearestX = 2 * this.priceScale(this.midPrice) - nearestX;
         }
 
+        // console.log('priceLabels [index]: ', this.priceLabels[buyIndex]);
         this.buyVolRatioText.update(
-          '-' + this.volumeLabels[buyIndex],
+          ((fRound(this.priceLabels[buyIndex])- this.midPrice) / this.midPrice * 100).toFixed(1) + '%',
           // width / 2 - buyNearestX > resolution * this.buyVolRatioText.width + 6
           //   ? width / 2 - resolution * 2
           //   : buyNearestX - 6,
@@ -608,7 +614,7 @@ export class UI extends EventEmitter {
         );
 
         this.sellVolRatioText.update(
-          '+' + this.volumeLabels[sellIndex],
+          '+' + ((fRound(this.priceLabels[sellIndex])- this.midPrice) / this.midPrice * 100).toFixed(1) + '%',
           // sellNearestX - width / 2 > resolution * this.sellVolRatioText.width + 6
           //   ? width / 2 + resolution * 3
           //   : sellNearestX + 6,
