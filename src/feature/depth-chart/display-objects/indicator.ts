@@ -23,7 +23,7 @@ export class Indicator extends Container {
     this.visible = false;
   }
 
-  public update(x: number, y: number, width: number) {
+  public update(x: number, y: number, width: number, height: number, camp: string = 'buy') {
     this.circle.x = x;
     this.circle.y = y;
 
@@ -36,7 +36,12 @@ export class Indicator extends Container {
     });
 
     this.line.moveTo(x, 0);
-    this.line.lineTo(x, y);
+    this.line.lineTo(x, height);
+    if (camp === 'buy') {
+      this.line.moveTo(0, y);
+    } else {
+      this.line.moveTo(width, y);
+    }
     this.line.lineTo(width / 2, y);
     this.line.endFill();
   }

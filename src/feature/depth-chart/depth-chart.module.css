@@ -4,7 +4,7 @@
 }
 
 .canvasContainer {
-  cursor: crosshair;
+  /* cursor: crosshair; */
   height: 100%;
   position: relative;
   width: 100%;

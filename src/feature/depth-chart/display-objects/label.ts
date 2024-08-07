@@ -2,7 +2,7 @@ import { Container, Graphics, Text } from "@ui/renderer";
 
 import { Colors } from "../helpers";
 
-type LabelColors = Pick<Colors, "backgroundLabel" | "textPrimary">;
+type LabelColors = Pick<Colors, "backgroundLabel" | "buyStroke" | "sellStroke">;
 
 /**
  * Draw a label
@@ -30,13 +30,14 @@ export class Label extends Container {
     anchor: { x: number; y: number },
     resolution: number = 1,
     colors: LabelColors,
+    camp: string = 'buy',
   ) {
     this.text.x = x;
     this.text.y = y;
     this.text.text = text;
     this.text.anchor.x = anchor.x;
     this.text.anchor.y = anchor.y;
-    this.text.style.fill = colors.textPrimary;
+    this.text.style.fill = camp === 'buy' ? colors.buyStroke : colors.sellStroke;
 
     const width = resolution * this.text.width;
     const height = resolution * this.text.height;

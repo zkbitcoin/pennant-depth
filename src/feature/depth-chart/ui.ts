@@ -114,9 +114,11 @@ export class UI extends EventEmitter {
 
   private buyPriceText = new Label();
   private buyVolumeText = new Label();
+  private buyVolRatioText = new Label();
 
   private sellPriceText = new Label();
   private sellVolumeText = new Label();
+  private sellVolRatioText = new Label();
 
   private auctionPriceText = new Label();
   private auctionVolumeText = new Label();
@@ -166,9 +168,11 @@ export class UI extends EventEmitter {
 
     this.buyPriceText.visible = false;
     this.buyVolumeText.visible = false;
+    this.buyVolRatioText.visible = false;
 
     this.sellPriceText.visible = false;
     this.sellVolumeText.visible = false;
+    this.sellVolRatioText.visible = false;
 
     this.auctionPriceText.visible = false;
     this.auctionVolumeText.visible = false;
@@ -184,8 +188,10 @@ export class UI extends EventEmitter {
     this.stage.addChild(this.midMarketPriceLabel);
     this.stage.addChild(this.buyPriceText);
     this.stage.addChild(this.buyVolumeText);
+    this.stage.addChild(this.buyVolRatioText);
     this.stage.addChild(this.sellPriceText);
     this.stage.addChild(this.sellVolumeText);
+    this.stage.addChild(this.sellVolRatioText);
     this.stage.addChild(this.auctionPriceText);
     this.stage.addChild(this.auctionVolumeText);
     this.stage.addChild(this.separator);
@@ -497,6 +503,7 @@ export class UI extends EventEmitter {
             this.prices[index],
             this.volumes[index],
             width,
+            height,
           );
 
           this.auctionPriceText.visible = true;
@@ -544,6 +551,27 @@ export class UI extends EventEmitter {
           sellNearestX = 2 * this.priceScale(this.midPrice) - nearestX;
         }
 
+        this.buyVolRatioText.update(
+          '-' + this.volumeLabels[buyIndex],
+          // width / 2 - buyNearestX > resolution * this.buyVolRatioText.width + 6
+          //   ? width / 2 - resolution * 2
+          //   : buyNearestX - 6,
+          buyNearestX + (width / 2 - buyNearestX) / 2 + resolution * this.buyVolRatioText.width / 2,
+          Math.min(
+            Math.max(
+              this.volumes[buyIndex],
+              (resolution * this.buyVolRatioText.height) / 2 + 2,
+            ),
+            height -
+              resolution * AXIS_HEIGHT -
+              (resolution * this.buyVolRatioText.height) / 2 -
+              2,
+          ),
+          { x: 1, y: 0.5 },
+          resolution,
+          this.colors,
+        );
+
         this.buyPriceText.update(
           this.priceLabels[buyIndex],
           Math.min(
@@ -563,9 +591,7 @@ export class UI extends EventEmitter {
 
         this.buyVolumeText.update(
           this.volumeLabels[buyIndex],
-          width / 2 - buyNearestX > resolution * this.buyVolumeText.width + 6
-            ? width / 2 - resolution * 2
-            : buyNearestX - 6,
+          this.buyVolumeText.width,
           Math.min(
             Math.max(
               this.volumes[buyIndex],
@@ -579,6 +605,28 @@ export class UI extends EventEmitter {
           { x: 1, y: 0.5 },
           resolution,
           this.colors,
+        );
+
+        this.sellVolRatioText.update(
+          '+' + this.volumeLabels[sellIndex],
+          // sellNearestX - width / 2 > resolution * this.sellVolRatioText.width + 6
+          //   ? width / 2 + resolution * 3
+          //   : sellNearestX + 6,
+          width / 2 + (sellNearestX - width / 2) / 2 - resolution * this.sellVolRatioText.width / 2,
+          Math.min(
+            Math.max(
+              this.volumes[sellIndex],
+              (resolution * this.sellVolRatioText.height) / 2 + 2,
+            ),
+            height -
+              resolution * AXIS_HEIGHT -
+              (resolution * this.sellVolRatioText.height) / 2 -
+              2,
+          ),
+          { x: 0, y: 0.5 },
+          resolution,
+          this.colors,
+          'sell',
         );
 
         this.sellPriceText.update(
@@ -596,13 +644,12 @@ export class UI extends EventEmitter {
           { x: 0.5, y: 0.5 },
           resolution,
           this.colors,
+          'sell',
         );
 
         this.sellVolumeText.update(
           this.volumeLabels[sellIndex],
-          sellNearestX - width / 2 > resolution * this.sellVolumeText.width + 6
-            ? width / 2 + resolution * 3
-            : sellNearestX + 6,
+          width - this.sellVolumeText.width,
           Math.min(
             Math.max(
               this.volumes[sellIndex],
@@ -616,6 +663,7 @@ export class UI extends EventEmitter {
           { x: 0, y: 0.5 },
           resolution,
           this.colors,
+          'sell',
         );
 
         const sellPricesPresent =
@@ -623,8 +671,8 @@ export class UI extends EventEmitter {
 
         const buyPricesPresent = this.prices[0] < width / 2;
 
-        this.buyIndicator.update(buyNearestX, this.volumes[buyIndex], width);
-        this.sellIndicator.update(sellNearestX, this.volumes[sellIndex], width);
+        this.buyIndicator.update(buyNearestX, this.volumes[buyIndex], width, height);
+        this.sellIndicator.update(sellNearestX, this.volumes[sellIndex], width, height, 'sell');
 
         this.buyOverlay.update(
           0,
@@ -650,11 +698,13 @@ export class UI extends EventEmitter {
         ) {
           this.buyPriceText.visible = true;
           this.buyVolumeText.visible = true;
+          this.buyVolRatioText.visible = true;
           this.buyIndicator.visible = true;
           this.buyOverlay.visible = true;
         } else {
           this.buyPriceText.visible = false;
           this.buyVolumeText.visible = false;
+          this.buyVolRatioText.visible = false;
           this.buyIndicator.visible = false;
           this.buyOverlay.visible = false;
         }
@@ -666,11 +716,13 @@ export class UI extends EventEmitter {
         ) {
           this.sellPriceText.visible = true;
           this.sellVolumeText.visible = true;
+          this.sellVolRatioText.visible = true;
           this.sellIndicator.visible = true;
           this.sellOverlay.visible = true;
         } else {
           this.sellPriceText.visible = false;
           this.sellVolumeText.visible = false;
+          this.sellVolRatioText.visible = false;
           this.sellIndicator.visible = false;
           this.sellOverlay.visible = false;
         }
@@ -689,8 +741,10 @@ export class UI extends EventEmitter {
   private onPointerOut = () => {
     this.buyPriceText.visible = false;
     this.buyVolumeText.visible = false;
+    this.buyVolRatioText.visible = false;
     this.sellPriceText.visible = false;
     this.sellVolumeText.visible = false;
+    this.sellVolRatioText.visible = false;
 
     this.buyIndicator.visible = false;
     this.sellIndicator.visible = false;
