@@ -53,7 +53,7 @@ export class Text extends Sprite {
     this._font = this._style.toFontString();
 
     const context = this.context;
-
+    // create rectangle
     const measured = TextMetrics.measureText(
       this._text || " ",
       this._style,

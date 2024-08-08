@@ -132,7 +132,7 @@ export class UI extends EventEmitter {
   private sellOverlay: Rect = new Rect(0x0, OVERLAY_OPACITY);
 
   private midMarketPriceLabel: MidMarketPriceLabel;
-  private midPriceLine: VerticalLine = new VerticalLine(1, 0xdedede);
+  private midPriceLine: VerticalLine = new VerticalLine(1.5, 0xdedede);
 
   private separator: HorizontalLine = new HorizontalLine(1, 0x494949);
 
@@ -589,7 +589,7 @@ export class UI extends EventEmitter {
               (resolution * this.buyPriceText.width) / 2 -
               resolution * 2,
           ),
-          height - (resolution * AXIS_HEIGHT) / 2,
+          height - (resolution * AXIS_HEIGHT) / 2 + 5,
           { x: 0.5, y: 0.5 },
           resolution,
           this.colors,
@@ -646,7 +646,7 @@ export class UI extends EventEmitter {
               (resolution * this.sellPriceText.width) / 2 +
               resolution * 2,
           ),
-          height - (resolution * AXIS_HEIGHT) / 2,
+          height - (resolution * AXIS_HEIGHT) / 2 + 5,
           { x: 0.5, y: 0.5 },
           resolution,
           this.colors,
