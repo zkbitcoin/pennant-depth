@@ -73,14 +73,14 @@ export class HorizontalAxis extends Container {
       text.updateText(); // TODO: Should not need to call this
 
       this.nodeByKeyValue.set(tickFormat(node), text);
-      this.tmByKeyValue.set(tickFormat(node), tickMark);
+      this.tmByKeyValue.set(tickFormat(node)+"|", tickMark);
       this.addChild(text);
       this.addChild(tickMark);
     }
 
     for (const node of update) {
       const text = this.nodeByKeyValue.get(tickFormat(node))!;
-      const tm = this.tmByKeyValue.get(tickFormat(node))!;
+      const tm = this.tmByKeyValue.get(tickFormat(node)+"|")!;
 
       text.style.fill = colors.textSecondary;
       text.x = scale(node);
@@ -92,7 +92,7 @@ export class HorizontalAxis extends Container {
 
     for (const node of exit) {
       const text = this.nodeByKeyValue.get(node)!;
-      const tm = this.tmByKeyValue.get(node)!;
+      const tm = this.tmByKeyValue.get(node+"|")!;
 
       this.nodeByKeyValue.delete(node);
       this.removeChild(text);

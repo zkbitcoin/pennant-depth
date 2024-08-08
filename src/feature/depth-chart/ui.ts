@@ -199,7 +199,7 @@ export class UI extends EventEmitter {
     this.stage.addChild(this.sellVolRatioText);
     this.stage.addChild(this.auctionPriceText);
     this.stage.addChild(this.auctionVolumeText);
-    this.stage.addChild(this.separator);
+    // this.stage.addChild(this.separator);
 
     this.stage.interactive = true;
     this.stage.hitArea = new Rectangle(0, 0, options.width, options.height);
@@ -390,7 +390,7 @@ export class UI extends EventEmitter {
     );
 
     this.midMarketPriceLabel.update(
-      width / 2,
+      (width-30) / 2,
       10,
       {
         x: 0.5,
@@ -402,8 +402,8 @@ export class UI extends EventEmitter {
       midPriceTitle,
     );
 
-    this.midPriceLine.update(width / 2, height, resolution);
-    this.separator.update(height - resolution * AXIS_HEIGHT, width);
+    this.midPriceLine.update((width-30) / 2, height, resolution);
+    this.separator.update(height - resolution * AXIS_HEIGHT, width - 30);
 
     this.stage.hitArea = new Rectangle(
       0,
@@ -655,7 +655,7 @@ export class UI extends EventEmitter {
 
         this.sellVolumeText.update(
           this.volumeLabels[sellIndex],
-          width - this.sellVolumeText.width,
+          width - this.sellVolumeText.width + 10,
           Math.min(
             Math.max(
               this.volumes[sellIndex],
@@ -691,7 +691,7 @@ export class UI extends EventEmitter {
         this.sellOverlay.update(
           sellNearestX,
           0,
-          width - sellNearestX,
+          width - sellNearestX - 30,
           height - resolution * AXIS_HEIGHT,
           this.colors.textPrimary,
         );

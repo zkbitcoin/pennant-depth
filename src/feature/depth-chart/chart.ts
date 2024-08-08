@@ -122,7 +122,7 @@ export class Chart extends EventEmitter {
   }
 
   public resize(width: number, height: number) {
-    this.chart.renderer.resize(width, height);
+    this.chart.renderer.resize(width - 30, height);
     this.axis.renderer.resize(width, height);
   }
 
