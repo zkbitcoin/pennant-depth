@@ -47,7 +47,7 @@ function pointer(event: any) {
 }
 
 function fRound(str: string) {
-  str = str.replace(',', '');
+  str = str?.replace(',', '');
   return parseFloat(str);
 }
 
