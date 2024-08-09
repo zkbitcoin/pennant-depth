@@ -369,7 +369,7 @@ export class UI extends EventEmitter {
     this.volumeLabels = volumeLabels;
     this.priceScale = priceScale;
 
-    const width = this.renderer.view.width;
+    const width = this.renderer.view.width-30;
     const height = this.renderer.view.height;
     const resolution = this.renderer.resolution;
 
@@ -390,7 +390,8 @@ export class UI extends EventEmitter {
     );
 
     this.midMarketPriceLabel.update(
-      (width-30) / 2,
+      // (width-30) / 2,
+      (width) / 2,
       10,
       {
         x: 0.5,
@@ -402,8 +403,10 @@ export class UI extends EventEmitter {
       midPriceTitle,
     );
 
-    this.midPriceLine.update((width-30) / 2, height, resolution);
-    this.separator.update(height - resolution * AXIS_HEIGHT, width - 30);
+    // this.midPriceLine.update((width-30) / 2, height, resolution);
+    // this.separator.update(height - resolution * AXIS_HEIGHT, width - 30);
+    this.midPriceLine.update((width) / 2, height, resolution);
+    this.separator.update(height - resolution * AXIS_HEIGHT, width);
 
     this.stage.hitArea = new Rectangle(
       0,
@@ -440,7 +443,7 @@ export class UI extends EventEmitter {
       const resolution = this.renderer.resolution;
       x *= resolution;
 
-      const width = this.renderer.view.width;
+      const width = this.renderer.view.width-30;
       const height = this.renderer.view.height;
 
       // In auction mode. Curves will in general overlap
@@ -535,7 +538,7 @@ export class UI extends EventEmitter {
               : bisectLeft(
                   this.prices,
                   2 * this.priceScale(this.midPrice) - nearestX,
-                );
+                )-1;
 
           sellIndex = index;
 
@@ -655,7 +658,7 @@ export class UI extends EventEmitter {
 
         this.sellVolumeText.update(
           this.volumeLabels[sellIndex],
-          width - this.sellVolumeText.width + 10,
+          width - this.sellVolumeText.width,
           Math.min(
             Math.max(
               this.volumes[sellIndex],
@@ -677,7 +680,9 @@ export class UI extends EventEmitter {
 
         const buyPricesPresent = this.prices[0] < width / 2;
 
+        // this.buyIndicator.update(buyNearestX, this.volumes[buyIndex], width-30, height);
         this.buyIndicator.update(buyNearestX, this.volumes[buyIndex], width, height);
+        // this.sellIndicator.update(sellNearestX, this.volumes[sellIndex], width-30, height, 'sell');
         this.sellIndicator.update(sellNearestX, this.volumes[sellIndex], width, height, 'sell');
 
         this.buyOverlay.update(
@@ -691,7 +696,8 @@ export class UI extends EventEmitter {
         this.sellOverlay.update(
           sellNearestX,
           0,
-          width - sellNearestX - 30,
+          // width - sellNearestX - 30,
+          width - sellNearestX,
           height - resolution * AXIS_HEIGHT,
           this.colors.textPrimary,
         );
