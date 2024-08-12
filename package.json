@@ -1,11 +1,11 @@
 {
-  "name": "pennant-depth",
+  "name": "dfxfe-depth",
   "version": "1.0.0",
   "description": "A React component library for visualising historical and streaming financial market data",
   "main": "./dist/legacy.js",
   "types": "./dist/types/index.d.ts",
   "keywords": [
-    "vega",
+    "depth",
     "charts"
   ],
   "repository": {

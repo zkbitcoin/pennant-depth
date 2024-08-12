@@ -15,7 +15,7 @@ const config = {
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
   organizationName: "sam", // Usually your GitHub org/user name.
-  projectName: "pennant-depth", // Usually your repo name.
+  projectName: "dfxfe-depth", // Usually your repo name.
   presets: [
     [
       "classic",
@@ -59,7 +59,7 @@ const config = {
             label: "Docs",
           },
           {
-            href: "https://github.com/samchangi/pennant",
+            href: "https://github.com/samchangi/pennant-depth",
             label: "GitHub",
             position: "right",
           },
@@ -82,7 +82,7 @@ const config = {
             items: [
               {
                 label: "GitHub",
-                href: "https://github.com/samchangi/pennant",
+                href: "https://github.com/samchangi/pennant-depth",
               },
             ],
           },

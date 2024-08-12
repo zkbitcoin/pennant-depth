@@ -4,7 +4,7 @@
 
 <br />
 <p align="center">
-  <a href="https://github.com/samchangi/pennant">
+  <a href="https://github.com/samchangi/pennant-depth">
     <img src="./assets/logo.svg" alt="Logo" width="256" height="128" style="image-rendering: pixelated;">
   </a>
 
@@ -25,9 +25,9 @@
   <p align="center">
     <a href="https://pennant.vega.xyz">View Demo</a>
     ·
-    <a href="https://github.com/samchangi/pennant/issues">Report Bug</a>
+    <a href="https://github.com/samchangi/pennant-depth/issues">Report Bug</a>
     ·
-    <a href="https://github.com/samchangi/pennant/issues">Request Feature</a>
+    <a href="https://github.com/samchangi/pennant-depth/issues">Request Feature</a>
   </p>
 </p>
 
