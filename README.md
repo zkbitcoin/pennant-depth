@@ -69,14 +69,14 @@ yarn add react react-dom
 ### Installation
 
 ```sh
-yarn add pennant
+yarn add dfxfe-depth
 ```
 
 ## Usage
 
 ```jsx
 import React from "react";
-import { CandlestickChart } from "pennant";
+import { CandlestickChart } from "dfxfe-depth";
 
 const dataSource = new DataSource();
 const options = {
