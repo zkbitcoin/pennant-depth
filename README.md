@@ -1,14 +1,14 @@
-[![CI status](https://github.com/vegaprotocol/pennant/actions/workflows/test.yml/badge.svg)](https://github.com/vegaprotocol/pennant/actions/workflows/test.yml)
+<!-- [![CI status](https://github.com/vegaprotocol/pennant/actions/workflows/test.yml/badge.svg)](https://github.com/vegaprotocol/pennant/actions/workflows/test.yml)
 [![GitHub license](https://img.shields.io/npm/l/pennant?style=plastic)](https://github.com/vegaprotocol/pennant/blob/main/LICENSE)
-[![NPM](https://img.shields.io/npm/v/pennant?style=plastic&color=green)](https://npmjs.com/package/pennant/)
+[![NPM](https://img.shields.io/npm/v/pennant?style=plastic&color=green)](https://npmjs.com/package/pennant/) -->
 
 <br />
 <p align="center">
-  <a href="https://github.com/vegaprotocol/pennant">
+  <a href="https://github.com/samchangi/pennant">
     <img src="./assets/logo.svg" alt="Logo" width="256" height="128" style="image-rendering: pixelated;">
   </a>
 
-  <h3 align="center">Pennant</h3>
+  <h3 align="center">Pennant-depth</h3>
 
   <p align="center">
     A React component library for visualising historical and streaming financial market data.
@@ -25,9 +25,9 @@
   <p align="center">
     <a href="https://pennant.vega.xyz">View Demo</a>
     ·
-    <a href="https://github.com/vegaprotocol/pennant/issues">Report Bug</a>
+    <a href="https://github.com/samchangi/pennant/issues">Report Bug</a>
     ·
-    <a href="https://github.com/vegaprotocol/pennant/issues">Request Feature</a>
+    <a href="https://github.com/samchangi/pennant/issues">Request Feature</a>
   </p>
 </p>
 

@@ -14,8 +14,8 @@ const config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
-  organizationName: "vegaprotocol", // Usually your GitHub org/user name.
-  projectName: "pennant", // Usually your repo name.
+  organizationName: "sam", // Usually your GitHub org/user name.
+  projectName: "pennant-depth", // Usually your repo name.
   presets: [
     [
       "classic",
@@ -59,7 +59,7 @@ const config = {
             label: "Docs",
           },
           {
-            href: "https://github.com/vegaprotocol/pennant",
+            href: "https://github.com/samchangi/pennant",
             label: "GitHub",
             position: "right",
           },
@@ -82,7 +82,7 @@ const config = {
             items: [
               {
                 label: "GitHub",
-                href: "https://github.com/vegaprotocol/pennant",
+                href: "https://github.com/samchangi/pennant",
               },
             ],
           },
