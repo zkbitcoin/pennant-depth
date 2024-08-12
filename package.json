@@ -1,6 +1,6 @@
 {
   "name": "pennant-depth",
-  "version": "1.17.0",
+  "version": "1.0.0",
   "description": "A React component library for visualising historical and streaming financial market data",
   "main": "./dist/legacy.js",
   "types": "./dist/types/index.d.ts",
@@ -10,14 +10,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/SamChangi/pennant.git"
+    "url": "https://github.com/SamChangi/pennant-depth.git"
   },
   "author": "Sam",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SamChangi/pennant/issues"
+    "url": "https://github.com/SamChangi/pennant-depth/issues"
   },
-  "homepage": "https://github.com/SamChangi/pennant",
+  "homepage": "https://github.com/SamChangi/pennant-depth",
   "files": [
     "dist/*.js",
     "dist/*.mjs",
