@@ -22,7 +22,7 @@ const config = {
   output: [
     {
       file: meta.main,
-      format: "cjs",
+      format: "es",
       globals,
       plugins: [
         getBabelOutputPlugin({
