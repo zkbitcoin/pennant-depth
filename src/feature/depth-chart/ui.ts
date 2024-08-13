@@ -598,12 +598,12 @@ export class UI extends EventEmitter {
               (resolution * this.buyPriceText.width) / 2 -
               resolution * 2,
           ),
-          height - (resolution * AXIS_HEIGHT) / 2 + 5,
+          height - (resolution * AXIS_HEIGHT) / 2 + 3,
           { x: 0.5, y: 0.5 },
           resolution,
           this.colors,
         );
-
+        // console.log(this.volumeLabels[buyIndex]);
         this.buyVolumeText.update(
           this.volumeLabels[buyIndex],
           this.buyVolumeText.width,
@@ -663,7 +663,7 @@ export class UI extends EventEmitter {
               (resolution * this.sellPriceText.width) / 2 +
               resolution * 2,
           ),
-          height - (resolution * AXIS_HEIGHT) / 2 + 5,
+          height - (resolution * AXIS_HEIGHT) / 2 + 3,
           { x: 0.5, y: 0.5 },
           resolution,
           this.colors,

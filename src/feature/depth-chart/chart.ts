@@ -135,12 +135,12 @@ export class Chart extends EventEmitter {
 
     const cumulativeBuy = zip<number>(
       this._data.buy.map((priceLevel) => priceLevel.price),
-      this._data.buy.map((priceLevel) => priceLevel.volume),
+      cumsum(this._data.buy.map((priceLevel) => priceLevel.volume)),
     ) as [number, number][];
 
     const cumulativeSell = zip<number>(
       this._data.sell.map((priceLevel) => priceLevel.price),
-      this._data.sell.map((priceLevel) => priceLevel.volume),
+      cumsum(this._data.sell.map((priceLevel) => priceLevel.volume)),
     ) as [number, number][];
 
     const midPrice = getMidPrice(
@@ -332,20 +332,21 @@ export class Chart extends EventEmitter {
 
     const cumulativeBuy = zip<number>(
       this._data.buy.map((priceLevel) => priceLevel.price),
-      this._data.buy.map((priceLevel) => priceLevel.volume),
+      cumsum(this._data.buy.map((priceLevel) => priceLevel.volume)),
     ) as [number, number][];
 
     const cumulativeSell = zip<number>(
       this._data.sell.map((priceLevel) => priceLevel.price),
-      this._data.sell.map((priceLevel) => priceLevel.volume),
+      cumsum(this._data.sell.map((priceLevel) => priceLevel.volume)),
     ) as [number, number][];
 
     this.volumes = orderBy([...cumulativeBuy, ...cumulativeSell], ["0"]).map(
       (priceLevel) => priceLevel[1],
     );
 
-    this.volumeLabels = this.volumes.map((volume) => this.volumeFormat(volume));
-
+    // console.log(this.volumes);
+    this.volumeLabels = this.volumes.map((volume) => String(volume));
+    // console.log(this.volumeLabels);
     this.update();
     this.render();
   }

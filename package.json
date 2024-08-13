@@ -61,6 +61,7 @@
     "d3-transition": "^2.0.0",
     "d3-zoom": "^2.0.0",
     "date-fns": "^2.17.0",
+    "decimal.js": "^10.4.3",
     "eventemitter3": "^5.0.0",
     "internmap": "^2.0.1",
     "lodash": "^4.17.20",

@@ -22,7 +22,6 @@ export class HorizontalAxis extends Container {
    */
   private tmByKeyValue = new Map<string, Text>();
 
-
   constructor() {
     super();
   }
@@ -63,36 +62,36 @@ export class HorizontalAxis extends Container {
       });
 
       text.x = scale(node);
-      text.y = height - (resolution * AXIS_HEIGHT) / 2 + 5;
+      text.y = height - (resolution * AXIS_HEIGHT) / 2 + 3;
       text.anchor.set(0.5, 0.5);
 
       tickMark.x = scale(node);
-      tickMark.y = height - (resolution * AXIS_HEIGHT) / 2 - 5;
+      tickMark.y = height - (resolution * AXIS_HEIGHT) / 2 - 6;
       tickMark.anchor.set(0.5, 0.5);
 
       text.updateText(); // TODO: Should not need to call this
 
       this.nodeByKeyValue.set(tickFormat(node), text);
-      this.tmByKeyValue.set(tickFormat(node)+"|", tickMark);
+      this.tmByKeyValue.set(tickFormat(node) + "|", tickMark);
       this.addChild(text);
       this.addChild(tickMark);
     }
 
     for (const node of update) {
       const text = this.nodeByKeyValue.get(tickFormat(node))!;
-      const tm = this.tmByKeyValue.get(tickFormat(node)+"|")!;
+      const tm = this.tmByKeyValue.get(tickFormat(node) + "|")!;
 
       text.style.fill = colors.textSecondary;
       text.x = scale(node);
-      text.y = height - (resolution * AXIS_HEIGHT) / 2 + 5;
+      text.y = height - (resolution * AXIS_HEIGHT) / 2 + 3;
 
       tm.x = scale(node);
-      tm.y = height - (resolution * AXIS_HEIGHT) / 2 - 5;
+      tm.y = height - (resolution * AXIS_HEIGHT) / 2 - 6;
     }
 
     for (const node of exit) {
       const text = this.nodeByKeyValue.get(node)!;
-      const tm = this.tmByKeyValue.get(node+"|")!;
+      const tm = this.tmByKeyValue.get(node + "|")!;
 
       this.nodeByKeyValue.delete(node);
       this.removeChild(text);
