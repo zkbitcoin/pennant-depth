@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.5](https://github.com/SamChangi/pennant-depth/compare/v1.0.4...v1.0.5) (2024-08-13)
+
+
+### Bug Fixes
+
+* decimal precision issue ([60f99aa](https://github.com/SamChangi/pennant-depth/commit/60f99aa7e6ae42989608cef28527b4189f332f84))
+
 ### [1.0.4](https://github.com/SamChangi/pennant-depth/compare/v1.0.3...v1.0.4) (2024-08-13)
 
 ### [1.0.3](https://github.com/SamChangi/pennant-depth/compare/v1.0.2...v1.0.3) (2024-08-13)
