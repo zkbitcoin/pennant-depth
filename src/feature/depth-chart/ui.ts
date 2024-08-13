@@ -47,7 +47,7 @@ function pointer(event: any) {
 }
 
 function fRound(str: string) {
-  str = str?.replace(',', '');
+  str = str?.replace(",", "");
   return parseFloat(str);
 }
 
@@ -190,7 +190,7 @@ export class UI extends EventEmitter {
     this.stage.addChild(this.horizontalAxis);
     this.stage.addChild(this.verticalAxis);
     this.stage.addChild(this.midPriceLine);
-    this.stage.addChild(this.midMarketPriceLabel);
+    // this.stage.addChild(this.midMarketPriceLabel);
     this.stage.addChild(this.buyPriceText);
     this.stage.addChild(this.buyVolumeText);
     this.stage.addChild(this.buyVolRatioText);
@@ -369,7 +369,7 @@ export class UI extends EventEmitter {
     this.volumeLabels = volumeLabels;
     this.priceScale = priceScale;
 
-    const width = this.renderer.view.width-30;
+    const width = this.renderer.view.width - 30;
     const height = this.renderer.view.height;
     const resolution = this.renderer.resolution;
 
@@ -391,7 +391,7 @@ export class UI extends EventEmitter {
 
     this.midMarketPriceLabel.update(
       // (width-30) / 2,
-      (width) / 2,
+      width / 2,
       10,
       {
         x: 0.5,
@@ -405,7 +405,7 @@ export class UI extends EventEmitter {
 
     // this.midPriceLine.update((width-30) / 2, height, resolution);
     // this.separator.update(height - resolution * AXIS_HEIGHT, width - 30);
-    this.midPriceLine.update((width) / 2, height, resolution);
+    this.midPriceLine.update(width / 2, height, resolution);
     this.separator.update(height - resolution * AXIS_HEIGHT, width);
 
     this.stage.hitArea = new Rectangle(
@@ -443,7 +443,7 @@ export class UI extends EventEmitter {
       const resolution = this.renderer.resolution;
       x *= resolution;
 
-      const width = this.renderer.view.width-30;
+      const width = this.renderer.view.width - 30;
       const height = this.renderer.view.height;
 
       // In auction mode. Curves will in general overlap
@@ -538,7 +538,7 @@ export class UI extends EventEmitter {
               : bisectLeft(
                   this.prices,
                   2 * this.priceScale(this.midPrice) - nearestX,
-                )-1;
+                ) - 1;
 
           sellIndex = index;
 
@@ -561,11 +561,17 @@ export class UI extends EventEmitter {
 
         // console.log('priceLabels [index]: ', this.priceLabels[buyIndex]);
         this.buyVolRatioText.update(
-          ((fRound(this.priceLabels[buyIndex])- this.midPrice) / this.midPrice * 100).toFixed(1) + '%',
+          (
+            ((fRound(this.priceLabels[buyIndex]) - this.midPrice) /
+              this.midPrice) *
+            100
+          ).toFixed(1) + "%",
           // width / 2 - buyNearestX > resolution * this.buyVolRatioText.width + 6
           //   ? width / 2 - resolution * 2
           //   : buyNearestX - 6,
-          buyNearestX + (width / 2 - buyNearestX) / 2 + resolution * this.buyVolRatioText.width / 2,
+          buyNearestX +
+            (width / 2 - buyNearestX) / 2 +
+            (resolution * this.buyVolRatioText.width) / 2,
           Math.min(
             Math.max(
               this.volumes[buyIndex],
@@ -617,11 +623,19 @@ export class UI extends EventEmitter {
         );
 
         this.sellVolRatioText.update(
-          '+' + ((fRound(this.priceLabels[sellIndex])- this.midPrice) / this.midPrice * 100).toFixed(1) + '%',
+          "+" +
+            (
+              ((fRound(this.priceLabels[sellIndex]) - this.midPrice) /
+                this.midPrice) *
+              100
+            ).toFixed(1) +
+            "%",
           // sellNearestX - width / 2 > resolution * this.sellVolRatioText.width + 6
           //   ? width / 2 + resolution * 3
           //   : sellNearestX + 6,
-          width / 2 + (sellNearestX - width / 2) / 2 - resolution * this.sellVolRatioText.width / 2,
+          width / 2 +
+            (sellNearestX - width / 2) / 2 -
+            (resolution * this.sellVolRatioText.width) / 2,
           Math.min(
             Math.max(
               this.volumes[sellIndex],
@@ -635,7 +649,7 @@ export class UI extends EventEmitter {
           { x: 0, y: 0.5 },
           resolution,
           this.colors,
-          'sell',
+          "sell",
         );
 
         this.sellPriceText.update(
@@ -653,7 +667,7 @@ export class UI extends EventEmitter {
           { x: 0.5, y: 0.5 },
           resolution,
           this.colors,
-          'sell',
+          "sell",
         );
 
         this.sellVolumeText.update(
@@ -672,7 +686,7 @@ export class UI extends EventEmitter {
           { x: 0, y: 0.5 },
           resolution,
           this.colors,
-          'sell',
+          "sell",
         );
 
         const sellPricesPresent =
@@ -681,9 +695,20 @@ export class UI extends EventEmitter {
         const buyPricesPresent = this.prices[0] < width / 2;
 
         // this.buyIndicator.update(buyNearestX, this.volumes[buyIndex], width-30, height);
-        this.buyIndicator.update(buyNearestX, this.volumes[buyIndex], width, height);
+        this.buyIndicator.update(
+          buyNearestX,
+          this.volumes[buyIndex],
+          width,
+          height,
+        );
         // this.sellIndicator.update(sellNearestX, this.volumes[sellIndex], width-30, height, 'sell');
-        this.sellIndicator.update(sellNearestX, this.volumes[sellIndex], width, height, 'sell');
+        this.sellIndicator.update(
+          sellNearestX,
+          this.volumes[sellIndex],
+          width,
+          height,
+          "sell",
+        );
 
         this.buyOverlay.update(
           0,
