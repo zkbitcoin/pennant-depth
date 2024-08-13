@@ -35,6 +35,8 @@ export class VerticalAxis extends Container {
   ) {
     const numTicks = height / resolution / 50;
     const ticks = scale.ticks(numTicks).filter((tick) => tick !== 0);
+    const length = ticks[ticks.length - 1]?.toLocaleString().length;
+    const yOffset = 5 * length + 20;
     const tickFormat = scale.tickFormat(numTicks);
 
     const enter = ticks.filter(
@@ -61,7 +63,7 @@ export class VerticalAxis extends Container {
         fontSize: 10,
       });
 
-      text.x = width - resolution * 7 + 35;
+      text.x = width - resolution * 7 + yOffset;
       text.y = scale(node);
       text.anchor.set(1, 0.5);
 
@@ -72,17 +74,17 @@ export class VerticalAxis extends Container {
       text.updateText(); // TODO: Should not need to call this
 
       this.nodeByKeyValue.set(tickFormat(node), text);
-      this.tmByKeyValue.set(tickFormat(node)+"-", tickMark);
+      this.tmByKeyValue.set(tickFormat(node) + "-", tickMark);
       this.addChild(text);
       this.addChild(tickMark);
     }
 
     for (const node of update) {
       const text = this.nodeByKeyValue.get(tickFormat(node))!;
-      const tm = this.tmByKeyValue.get(tickFormat(node)+"-")!;
+      const tm = this.tmByKeyValue.get(tickFormat(node) + "-")!;
 
       text.style.fill = colors.textSecondary;
-      text.x = width - resolution * 7 + 35;
+      text.x = width - resolution * 7 + yOffset;
       text.y = scale(node);
 
       tm.x = width - resolution * 7 + 14;
@@ -91,7 +93,7 @@ export class VerticalAxis extends Container {
 
     for (const node of exit) {
       const text = this.nodeByKeyValue.get(node)!;
-      const tm = this.tmByKeyValue.get(node+"-")!;
+      const tm = this.tmByKeyValue.get(node + "-")!;
 
       this.nodeByKeyValue.delete(node);
       this.removeChild(text);

@@ -102,6 +102,7 @@ export class UI extends EventEmitter {
   private priceLabels: string[] = [];
   private volumeLabels: string[] = [];
   private priceScale: ScaleLinear<number, number> = scaleLinear();
+  private volumeScale: ScaleLinear<number, number> = scaleLinear();
   private midPrice: number = 0;
   private _indicativePrice: number = 0;
 
@@ -368,10 +369,15 @@ export class UI extends EventEmitter {
     this.priceLabels = priceLabels;
     this.volumeLabels = volumeLabels;
     this.priceScale = priceScale;
+    this.volumeScale = volumeScale;
 
-    const width = this.renderer.view.width - 30;
-    const height = this.renderer.view.height;
     const resolution = this.renderer.resolution;
+    const height = this.renderer.view.height;
+
+    const numTicks = height / resolution / 50;
+    const ticks = volumeScale.ticks(numTicks).filter((tick) => tick !== 0);
+    const length = ticks[ticks.length - 1]?.toLocaleString().length;
+    const width = this.renderer.view.width - 5 * length - 15;
 
     this.horizontalAxis.update(
       this.priceScale,
@@ -443,7 +449,12 @@ export class UI extends EventEmitter {
       const resolution = this.renderer.resolution;
       x *= resolution;
 
-      const width = this.renderer.view.width - 30;
+      const numTicks = this.renderer.view.height / resolution / 50;
+      const ticks = this.volumeScale
+        .ticks(numTicks)
+        .filter((tick) => tick !== 0);
+      const length = ticks[ticks.length - 1]?.toLocaleString().length;
+      const width = this.renderer.view.width - 5 * length - 15; // y offset
       const height = this.renderer.view.height;
 
       // In auction mode. Curves will in general overlap

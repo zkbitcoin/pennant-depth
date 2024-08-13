@@ -1,5 +1,5 @@
 import { extent, max, mean, min } from "d3-array";
-import { scaleLinear } from "d3-scale";
+import { ScaleLinear, scaleLinear } from "d3-scale";
 import EventEmitter from "eventemitter3";
 import { orderBy, sortBy, zip } from "lodash";
 
@@ -42,6 +42,7 @@ export class Chart extends EventEmitter {
   private initialSpan: number = 1;
   private maxPriceDifference: number = 0;
   private initialPriceDifference: number = 0;
+  private volumeScale: ScaleLinear<number, number> = scaleLinear();
 
   private _data: { buy: PriceLevel[]; sell: PriceLevel[] } = {
     buy: [],
@@ -122,7 +123,17 @@ export class Chart extends EventEmitter {
   }
 
   public resize(width: number, height: number) {
-    this.chart.renderer.resize(width - 30, height);
+    const numTicks = height / 50;
+    const ticks = this.volumeScale.ticks(numTicks).filter((tick) => tick !== 0);
+    console.log(ticks[ticks.length - 1]?.toLocaleString().length);
+    const length = ticks[ticks.length - 1]?.toLocaleString().length;
+    // {length: 4, width: 35, yA: 40}
+    // {length: 3, width: 30, yA: 35}
+    // {length: 2, width: 25, yA: 30}
+    // {length: 1, width: 20, yA: 25}
+    // {n 20+(n-1)*5 25+(n-1)*5}
+    // {n 5n+15 5n+20}
+    this.chart.renderer.resize(width - 5 * length - 15, height);
     this.axis.renderer.resize(width, height);
   }
 
@@ -135,11 +146,13 @@ export class Chart extends EventEmitter {
 
     const cumulativeBuy = zip<number>(
       this._data.buy.map((priceLevel) => priceLevel.price),
+      // this._data.buy.map((priceLevel) => priceLevel.volume)
       cumsum(this._data.buy.map((priceLevel) => priceLevel.volume)),
     ) as [number, number][];
 
     const cumulativeSell = zip<number>(
       this._data.sell.map((priceLevel) => priceLevel.price),
+      // this._data.sell.map((priceLevel) => priceLevel.volume)
       cumsum(this._data.sell.map((priceLevel) => priceLevel.volume)),
     ) as [number, number][];
 
@@ -227,7 +240,7 @@ export class Chart extends EventEmitter {
 
     const priceScale = scaleLinear().domain(priceExtent).range([0, this.width]);
 
-    const volumeScale = scaleLinear()
+    this.volumeScale = scaleLinear()
       .domain(volumeExtent)
       .range([this.height - resolution * AXIS_HEIGHT, 0]);
 
@@ -253,11 +266,11 @@ export class Chart extends EventEmitter {
     this.chart.update(
       cumulativeBuy.map((point) => [
         priceScale(point[0]),
-        volumeScale(point[1]),
+        this.volumeScale(point[1]),
       ]),
       cumulativeSell.map((point) => [
         priceScale(point[0]),
-        volumeScale(point[1]),
+        this.volumeScale(point[1]),
       ]),
     );
 
@@ -288,14 +301,14 @@ export class Chart extends EventEmitter {
 
     this.axis.update(
       this.prices.map((price) => priceScale(price)),
-      this.volumes.map((volume) => volumeScale(volume)),
+      this.volumes.map((volume) => this.volumeScale(volume)),
       midPrice,
       this.priceLabels,
       this.volumeLabels,
       this.priceFormat(midPrice),
       this._indicativePrice > 0 ? "Indicative price" : "Mid Market Price",
       priceScale,
-      volumeScale,
+      this.volumeScale,
     );
   }
 
@@ -332,11 +345,13 @@ export class Chart extends EventEmitter {
 
     const cumulativeBuy = zip<number>(
       this._data.buy.map((priceLevel) => priceLevel.price),
+      // this._data.buy.map((priceLevel) => priceLevel.volume)
       cumsum(this._data.buy.map((priceLevel) => priceLevel.volume)),
     ) as [number, number][];
 
     const cumulativeSell = zip<number>(
       this._data.sell.map((priceLevel) => priceLevel.price),
+      // this._data.sell.map((priceLevel) => priceLevel.volume)
       cumsum(this._data.sell.map((priceLevel) => priceLevel.volume)),
     ) as [number, number][];
 
@@ -344,7 +359,6 @@ export class Chart extends EventEmitter {
       (priceLevel) => priceLevel[1],
     );
 
-    // console.log(this.volumes);
     this.volumeLabels = this.volumes.map((volume) => String(volume));
     // console.log(this.volumeLabels);
     this.update();
