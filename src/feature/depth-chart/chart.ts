@@ -135,12 +135,12 @@ export class Chart extends EventEmitter {
 
     const cumulativeBuy = zip<number>(
       this._data.buy.map((priceLevel) => priceLevel.price),
-      cumsum(this._data.buy.map((priceLevel) => priceLevel.volume)),
+      this._data.buy.map((priceLevel) => priceLevel.volume),
     ) as [number, number][];
 
     const cumulativeSell = zip<number>(
       this._data.sell.map((priceLevel) => priceLevel.price),
-      cumsum(this._data.sell.map((priceLevel) => priceLevel.volume)),
+      this._data.sell.map((priceLevel) => priceLevel.volume),
     ) as [number, number][];
 
     const midPrice = getMidPrice(
