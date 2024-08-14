@@ -448,12 +448,12 @@ export const FractionalVolume = Template.bind({});
 FractionalVolume.args = {
   data: {
     buy: AAPL_data.buy.map((priceLevel) => ({
-      price: priceLevel.price * 10000,
-      volume: priceLevel.volume / 10,
+      price: priceLevel.price,
+      volume: priceLevel.volume / 100,
     })),
     sell: AAPL_data.sell.map((priceLevel) => ({
-      price: priceLevel.price * 10000,
-      volume: priceLevel.volume / 10,
+      price: priceLevel.price,
+      volume: priceLevel.volume / 100,
     })),
   },
   // priceFormat: (price: number) => numberFormatter(5).format(price),

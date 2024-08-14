@@ -27,7 +27,7 @@ function getMidPrice(
 }
 
 // Ratio of price percentage change to volume percentage change used to detect outliers
-const PRICE_VOLUME_RATIO_THRESHOLD = 100;
+const PRICE_VOLUME_RATIO_THRESHOLD = 100; // 价量比阈值, 用于检测异常值的价格百分比变化与成交量百分比变化之比
 
 export class Chart extends EventEmitter {
   private chart: Contents;
@@ -125,8 +125,8 @@ export class Chart extends EventEmitter {
   public resize(width: number, height: number) {
     const numTicks = height / 50;
     const ticks = this.volumeScale.ticks(numTicks).filter((tick) => tick !== 0);
-    console.log(ticks[ticks.length - 1]?.toLocaleString().length);
     const length = ticks[ticks.length - 1]?.toLocaleString().length;
+    // {length: 5, width: 40, yA: 45}
     // {length: 4, width: 35, yA: 40}
     // {length: 3, width: 30, yA: 35}
     // {length: 2, width: 25, yA: 30}
@@ -235,7 +235,7 @@ export class Chart extends EventEmitter {
 
     const volumeExtent: [number, number] = [
       0,
-      2 * (max(this.volumes.slice(indexExtent[0], indexExtent[1])) ?? 0),
+      1.2 * (max(this.volumes.slice(indexExtent[0], indexExtent[1])) ?? 0),
     ];
 
     const priceScale = scaleLinear().domain(priceExtent).range([0, this.width]);
@@ -243,6 +243,9 @@ export class Chart extends EventEmitter {
     this.volumeScale = scaleLinear()
       .domain(volumeExtent)
       .range([this.height - resolution * AXIS_HEIGHT, 0]);
+    // console.log('range:',this.height - resolution * AXIS_HEIGHT);
+    // const ticks = this.volumeScale.ticks(this.height / resolution / 50).filter((tick) => tick !== 0);
+    // console.log(ticks);
 
     // Add dummy data points at extreme points of price range
     // to ensure the chart looks symmetric

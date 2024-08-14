@@ -455,6 +455,8 @@ export class UI extends EventEmitter {
         .filter((tick) => tick !== 0);
       const length = ticks[ticks.length - 1]?.toLocaleString().length;
       const width = this.renderer.view.width - 5 * length - 15; // y offset
+      // this.renderer.resize(width - 5 * length - 15, height);
+      // console.log('onPointerMove: ', width);
       const height = this.renderer.view.height;
 
       // In auction mode. Curves will in general overlap
