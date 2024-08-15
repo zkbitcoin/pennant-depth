@@ -456,8 +456,8 @@ FractionalVolume.args = {
       volume: priceLevel.volume / 100,
     })),
   },
-  // priceFormat: (price: number) => numberFormatter(5).format(price),
-  // volumeFormat: (volume: number) => numberFormatter(2).format(volume),
+  priceFormat: (price: number) => numberFormatter(5).format(price),
+  volumeFormat: (volume: number) => numberFormatter(3).format(volume),
 };
 
 export const UnsortedPriceLevels = Template.bind({});

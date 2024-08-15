@@ -362,7 +362,8 @@ export class Chart extends EventEmitter {
       (priceLevel) => priceLevel[1],
     );
 
-    this.volumeLabels = this.volumes.map((volume) => String(volume));
+    this.volumeLabels = this.volumes.map((volume) => this.volumeFormat(volume));
+    // this.volumeLabels = this.volumes.map((volume) => String(volume));
     // console.log(this.volumeLabels);
     this.update();
     this.render();
