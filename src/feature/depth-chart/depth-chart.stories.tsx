@@ -449,11 +449,11 @@ FractionalVolume.args = {
   data: {
     buy: AAPL_data.buy.map((priceLevel) => ({
       price: priceLevel.price,
-      volume: priceLevel.volume / 100,
+      volume: priceLevel.volume / 1000000,
     })),
     sell: AAPL_data.sell.map((priceLevel) => ({
       price: priceLevel.price,
-      volume: priceLevel.volume / 100,
+      volume: priceLevel.volume / 1000000,
     })),
   },
   priceFormat: (price: number) => numberFormatter(5).format(price),

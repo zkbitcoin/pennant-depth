@@ -373,11 +373,12 @@ export class UI extends EventEmitter {
 
     const resolution = this.renderer.resolution;
     const height = this.renderer.view.height;
+    const width = this.renderer.view.width;
 
-    const numTicks = height / resolution / 50;
-    const ticks = volumeScale.ticks(numTicks).filter((tick) => tick !== 0);
-    const length = ticks[ticks.length - 1]?.toLocaleString().length;
-    const width = this.renderer.view.width - 5 * length - 15;
+    // const numTicks = height / resolution / 50;
+    // const ticks = volumeScale.ticks(numTicks).filter((tick) => tick !== 0);
+    // const length = ticks[ticks.length - 1]?.toLocaleString().length;
+    // const width = this.renderer.view.width - 5 * length - 15;
 
     this.horizontalAxis.update(
       this.priceScale,
@@ -449,14 +450,13 @@ export class UI extends EventEmitter {
       const resolution = this.renderer.resolution;
       x *= resolution;
 
-      const numTicks = this.renderer.view.height / resolution / 50;
-      const ticks = this.volumeScale
-        .ticks(numTicks)
-        .filter((tick) => tick !== 0);
-      const length = ticks[ticks.length - 1]?.toLocaleString().length;
-      const width = this.renderer.view.width - 5 * length - 15; // y offset
-      // this.renderer.resize(width - 5 * length - 15, height);
-      // console.log('onPointerMove: ', width);
+      // const numTicks = this.renderer.view.height / resolution / 50;
+      // const ticks = this.volumeScale
+      //   .ticks(numTicks)
+      //   .filter((tick) => tick !== 0);
+      // const length = ticks[ticks.length - 1]?.toLocaleString().length;
+      // const width = this.renderer.view.width - 5 * length - 15; // y offset
+      const width = this.renderer.view.width;
       const height = this.renderer.view.height;
 
       // In auction mode. Curves will in general overlap

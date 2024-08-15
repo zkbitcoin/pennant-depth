@@ -58,6 +58,7 @@ export class HorizontalAxis extends Container {
       const tickMark = new Text("|", {
         fill: colors.textSecondary,
         fontFamily: "monospace",
+        fontWeight: "bold",
         fontSize: 5,
       });
 

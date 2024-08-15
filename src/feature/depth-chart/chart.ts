@@ -3,7 +3,7 @@ import { ScaleLinear, scaleLinear } from "d3-scale";
 import EventEmitter from "eventemitter3";
 import { orderBy, sortBy, zip } from "lodash";
 
-import cumsum from "../../util/math/array/cumsum";
+import cumsum, { getFloatNumber } from "../../util/math/array/cumsum";
 import { Contents } from "./contents";
 import { AXIS_HEIGHT, PriceLevel } from "./depth-chart";
 import { Colors, Dimensions } from "./helpers";
@@ -123,17 +123,17 @@ export class Chart extends EventEmitter {
   }
 
   public resize(width: number, height: number) {
-    const numTicks = height / 50;
-    const ticks = this.volumeScale.ticks(numTicks).filter((tick) => tick !== 0);
-    const length = ticks[ticks.length - 1]?.toLocaleString().length;
+    // const numTicks = height / 50;
+    // const ticks = this.volumeScale.ticks(numTicks).filter((tick) => tick !== 0);
+    // const length = ticks[ticks.length - 1]?.toLocaleString().length;
     // {length: 5, width: 40, yA: 45}
     // {length: 4, width: 35, yA: 40}
     // {length: 3, width: 30, yA: 35}
     // {length: 2, width: 25, yA: 30}
     // {length: 1, width: 20, yA: 25}
-    // {n 20+(n-1)*5 25+(n-1)*5}
-    // {n 5n+15 5n+20}
-    this.chart.renderer.resize(width - 5 * length - 15, height);
+    // {n     5n+15      5n+20}
+    // this.chart.renderer.resize(width - 5 * length - 15, height);
+    this.chart.renderer.resize(width, height);
     this.axis.renderer.resize(width, height);
   }
 
@@ -243,9 +243,6 @@ export class Chart extends EventEmitter {
     this.volumeScale = scaleLinear()
       .domain(volumeExtent)
       .range([this.height - resolution * AXIS_HEIGHT, 0]);
-    // console.log('range:',this.height - resolution * AXIS_HEIGHT);
-    // const ticks = this.volumeScale.ticks(this.height / resolution / 50).filter((tick) => tick !== 0);
-    // console.log(ticks);
 
     // Add dummy data points at extreme points of price range
     // to ensure the chart looks symmetric
