@@ -1,6 +1,6 @@
 {
   "name": "exchange-depth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React component library for visualising historical and streaming financial market data",
   "main": "./dist/legacy.js",
   "module": "./dist/legacy.js",
@@ -26,7 +26,6 @@
     "dist/**/*.d.ts"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
     "@d3fc/d3fc-technical-indicator": "^8.0.1",
     "@floating-ui/react-dom": "^1.0.1",
     "@types/d3-array": "^2.9.0",
@@ -168,6 +167,7 @@
     "webpack": "5.88.1"
   },
   "peerDependencies": {
+    "@babel/runtime": "^7.13.10",
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
