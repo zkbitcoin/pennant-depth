@@ -241,7 +241,11 @@ export class Chart extends EventEmitter {
       .range([this.height - resolution * AXIS_HEIGHT, 0]);
 
     const numTicks = this.height / 50;
-    const ticks = volumeScale.ticks(numTicks).filter((tick) => tick !== 0);
+    let ticks = volumeScale.ticks(numTicks);
+    let flag: boolean = false;
+    if (ticks.every((el) => el === 0)) {
+      flag = true;
+    }
     const precision = getFloatNumber(ticks[ticks.length - 1]);
     // console.log("**precs**", precision);
     const size = ticks[ticks.length - 1]?.toLocaleString("en-IN", {
@@ -275,11 +279,11 @@ export class Chart extends EventEmitter {
     this.chart.update(
       cumulativeBuy.map((point) => [
         priceScale(point[0]),
-        volumeScale(point[1]),
+        flag ? this.height - resolution * AXIS_HEIGHT : volumeScale(point[1]),
       ]),
       cumulativeSell.map((point) => [
         priceScale(point[0]),
-        volumeScale(point[1]),
+        flag ? this.height - resolution * AXIS_HEIGHT : volumeScale(point[1]),
       ]),
       16 * size,
     );
@@ -313,7 +317,9 @@ export class Chart extends EventEmitter {
       this.width - 16 * size,
       this.height,
       this.prices.map((price) => priceScale(price)),
-      this.volumes.map((volume) => volumeScale(volume)),
+      this.volumes.map((volume) =>
+        flag ? this.height - resolution * AXIS_HEIGHT : volumeScale(volume),
+      ),
       midPrice,
       this.priceLabels,
       this.volumeLabels,

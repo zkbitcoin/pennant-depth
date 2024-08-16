@@ -460,9 +460,7 @@ export class UI extends EventEmitter {
       // const length = ticks[ticks.length - 1]?.toLocaleString().length;
       // const width = this.renderer.view.width - 5 * length - 15; // y offset
       const numTicks = this.renderer.view.height / resolution / 50;
-      const ticks = this.volumeScale
-        .ticks(numTicks)
-        .filter((tick) => tick !== 0);
+      const ticks = this.volumeScale.ticks(numTicks);
       const precision = getFloatNumber(ticks[ticks.length - 1]);
       const size = ticks[ticks.length - 1]?.toLocaleString("en-IN", {
         maximumFractionDigits: precision,
@@ -591,7 +589,7 @@ export class UI extends EventEmitter {
             ((fRound(this.priceLabels[buyIndex]) - this.midPrice) /
               this.midPrice) *
             100
-          ).toFixed(1) + "%",
+          ).toFixed(2) + "%",
           // width / 2 - buyNearestX > resolution * this.buyVolRatioText.width + 6
           //   ? width / 2 - resolution * 2
           //   : buyNearestX - 6,
@@ -654,7 +652,7 @@ export class UI extends EventEmitter {
               ((fRound(this.priceLabels[sellIndex]) - this.midPrice) /
                 this.midPrice) *
               100
-            ).toFixed(1) +
+            ).toFixed(2) +
             "%",
           // sellNearestX - width / 2 > resolution * this.sellVolRatioText.width + 6
           //   ? width / 2 + resolution * 3
