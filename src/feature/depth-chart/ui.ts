@@ -468,7 +468,7 @@ export class UI extends EventEmitter {
         maximumFractionDigits: precision,
         minimumFractionDigits: precision,
       }).length;
-      console.log("====", size);
+      // console.log("====", size);
       const width = this.renderer.view.width - 16 * size;
       const height = this.renderer.view.height;
 

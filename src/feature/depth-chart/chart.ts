@@ -243,13 +243,12 @@ export class Chart extends EventEmitter {
     const numTicks = this.height / 50;
     const ticks = volumeScale.ticks(numTicks).filter((tick) => tick !== 0);
     const precision = getFloatNumber(ticks[ticks.length - 1]);
-    console.log("**precs**", precision);
+    // console.log("**precs**", precision);
     const size = ticks[ticks.length - 1]?.toLocaleString("en-IN", {
       maximumFractionDigits: precision,
       minimumFractionDigits: precision,
     }).length;
-    console.log("==size==", size);
-    // console.log('****', ('3,000.006').toLocaleString().length);
+    // console.log("==size==", size);
     const priceScale = scaleLinear()
       .domain(priceExtent)
       .range([0, this.width - 16 * size]);
