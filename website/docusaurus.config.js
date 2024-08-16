@@ -15,7 +15,7 @@ const config = {
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
   organizationName: "sam", // Usually your GitHub org/user name.
-  projectName: "dfxfe-depth", // Usually your repo name.
+  projectName: "exchange-depth", // Usually your repo name.
   presets: [
     [
       "classic",

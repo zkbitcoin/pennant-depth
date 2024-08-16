@@ -69,14 +69,14 @@ yarn add react react-dom
 ### Installation
 
 ```sh
-yarn add dfxfe-depth
+yarn add exchange-depth
 ```
 
 ## Usage
 
 ```jsx
 import React from "react";
-import { CandlestickChart } from "dfxfe-depth";
+import { CandlestickChart } from "exchange-depth";
 
 const dataSource = new DataSource();
 const options = {
