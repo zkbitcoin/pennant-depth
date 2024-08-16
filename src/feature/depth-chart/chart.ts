@@ -42,8 +42,6 @@ export class Chart extends EventEmitter {
   private initialSpan: number = 1;
   private maxPriceDifference: number = 0;
   private initialPriceDifference: number = 0;
-  private volumeScale: ScaleLinear<number, number> = scaleLinear();
-
   private _data: { buy: PriceLevel[]; sell: PriceLevel[] } = {
     buy: [],
     sell: [],
@@ -238,11 +236,23 @@ export class Chart extends EventEmitter {
       1.2 * (max(this.volumes.slice(indexExtent[0], indexExtent[1])) ?? 0),
     ];
 
-    const priceScale = scaleLinear().domain(priceExtent).range([0, this.width]);
-
-    this.volumeScale = scaleLinear()
+    const volumeScale = scaleLinear()
       .domain(volumeExtent)
       .range([this.height - resolution * AXIS_HEIGHT, 0]);
+
+    const numTicks = this.height / 50;
+    const ticks = volumeScale.ticks(numTicks).filter((tick) => tick !== 0);
+    const precision = getFloatNumber(ticks[ticks.length - 1]);
+    console.log("**precs**", precision);
+    const size = ticks[ticks.length - 1]?.toLocaleString("en-IN", {
+      maximumFractionDigits: precision,
+      minimumFractionDigits: precision,
+    }).length;
+    console.log("==size==", size);
+    // console.log('****', ('3,000.006').toLocaleString().length);
+    const priceScale = scaleLinear()
+      .domain(priceExtent)
+      .range([0, this.width - 16 * size]);
 
     // Add dummy data points at extreme points of price range
     // to ensure the chart looks symmetric
@@ -266,12 +276,13 @@ export class Chart extends EventEmitter {
     this.chart.update(
       cumulativeBuy.map((point) => [
         priceScale(point[0]),
-        this.volumeScale(point[1]),
+        volumeScale(point[1]),
       ]),
       cumulativeSell.map((point) => [
         priceScale(point[0]),
-        this.volumeScale(point[1]),
+        volumeScale(point[1]),
       ]),
+      16 * size,
     );
 
     // TODO: Clean up this logic
@@ -300,15 +311,17 @@ export class Chart extends EventEmitter {
     this.axis.colors = this._colors;
 
     this.axis.update(
+      this.width - 16 * size,
+      this.height,
       this.prices.map((price) => priceScale(price)),
-      this.volumes.map((volume) => this.volumeScale(volume)),
+      this.volumes.map((volume) => volumeScale(volume)),
       midPrice,
       this.priceLabels,
       this.volumeLabels,
       this.priceFormat(midPrice),
       this._indicativePrice > 0 ? "Indicative price" : "Mid Market Price",
       priceScale,
-      this.volumeScale,
+      volumeScale,
     );
   }
 

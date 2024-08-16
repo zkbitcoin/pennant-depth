@@ -63,13 +63,15 @@ export class VerticalAxis extends Container {
         fontSize: 12,
       });
 
-      text.x = width - resolution * 7;
+      // text.x = width - resolution * 7;
+      text.x = width + 10;
       text.y = scale(node);
-      text.anchor.set(1, 0.5);
+      text.anchor.set(0, 0.5);
 
-      tickMark.x = width - resolution * 7 + 10;
+      // tickMark.x = width - resolution * 7 + 10;
+      tickMark.x = width;
       tickMark.y = scale(node);
-      tickMark.anchor.set(1, 0.5);
+      tickMark.anchor.set(0, 0.5);
 
       text.updateText(); // TODO: Should not need to call this
 
@@ -84,10 +86,12 @@ export class VerticalAxis extends Container {
       const tm = this.tmByKeyValue.get(tickFormat(node) + "-")!;
 
       text.style.fill = colors.textSecondary;
-      text.x = width - resolution * 7;
+      // text.x = width - resolution * 7;
+      text.x = width + 10;
       text.y = scale(node);
 
-      tm.x = width - resolution * 7 + 10;
+      // tm.x = width - resolution * 7 + 10;
+      tm.x = width;
       tm.y = scale(node);
     }
 

@@ -63,10 +63,27 @@ export class Contents {
   public render(): void {
     this.renderer.render(this.stage);
   }
+  private _clipPoints = (points: [number, number][], width: number) => {
+    const newPoints: [number, number][] = [];
+    points.forEach((point, index) => {
+      const [x, y] = point;
+      if (index === 0) {
+        newPoints.push(point);
+      } else if (x > width && points[index - 1][0] <= width) {
+        newPoints.push([width, y]);
+      } else if (points[index - 1][0] > width) {
+      } else {
+        newPoints.push(point);
+      }
+    });
+
+    return newPoints;
+  };
 
   public update(
     buyPoints: [number, number][],
     sellPoints: [number, number][],
+    offset: number,
   ): void {
     const resolution = this.renderer.resolution;
 
@@ -80,7 +97,7 @@ export class Contents {
     );
 
     this.sellCurve.update(
-      sellPoints,
+      this._clipPoints(sellPoints, this.renderer.view.width - offset),
       this.renderer.view.height,
       resolution,
       this.colors.sellFill,

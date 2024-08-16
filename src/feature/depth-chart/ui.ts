@@ -13,6 +13,7 @@ import EventEmitter from "eventemitter3";
 import { clamp } from "lodash";
 
 import { bisectCenter } from "../../util/math/array";
+import { getFloatNumber } from "../../util/math/array/cumsum";
 import { AXIS_HEIGHT } from "./depth-chart";
 import {
   HorizontalAxis,
@@ -353,6 +354,8 @@ export class UI extends EventEmitter {
   }
 
   public update(
+    width: number,
+    height: number,
     prices: number[],
     volumes: number[],
     midPrice: number,
@@ -372,8 +375,8 @@ export class UI extends EventEmitter {
     this.volumeScale = volumeScale;
 
     const resolution = this.renderer.resolution;
-    const height = this.renderer.view.height;
-    const width = this.renderer.view.width;
+    // const height = this.renderer.view.height;
+    // const width = this.renderer.view.width;
 
     // const numTicks = height / resolution / 50;
     // const ticks = volumeScale.ticks(numTicks).filter((tick) => tick !== 0);
@@ -456,7 +459,17 @@ export class UI extends EventEmitter {
       //   .filter((tick) => tick !== 0);
       // const length = ticks[ticks.length - 1]?.toLocaleString().length;
       // const width = this.renderer.view.width - 5 * length - 15; // y offset
-      const width = this.renderer.view.width;
+      const numTicks = this.renderer.view.height / resolution / 50;
+      const ticks = this.volumeScale
+        .ticks(numTicks)
+        .filter((tick) => tick !== 0);
+      const precision = getFloatNumber(ticks[ticks.length - 1]);
+      const size = ticks[ticks.length - 1]?.toLocaleString("en-IN", {
+        maximumFractionDigits: precision,
+        minimumFractionDigits: precision,
+      }).length;
+      console.log("====", size);
+      const width = this.renderer.view.width - 16 * size;
       const height = this.renderer.view.height;
 
       // In auction mode. Curves will in general overlap
