@@ -53,8 +53,8 @@ export class Chart extends EventEmitter {
   /** Arithmetic average of the best bid price and best offer price. */
   private _midPrice: number = 0;
 
-  private priceFormat: (price: number) => string;
-  private volumeFormat: (volume: number) => string;
+  priceFormat: (price: number) => string;
+  volumeFormat: (volume: number) => string;
 
   private _colors: Colors;
   private _dimensions: Dimensions;
