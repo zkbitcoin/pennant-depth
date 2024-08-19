@@ -457,8 +457,6 @@ export class UI extends EventEmitter {
       // const ticks = this.volumeScale
       //   .ticks(numTicks)
       //   .filter((tick) => tick !== 0);
-      // const length = ticks[ticks.length - 1]?.toLocaleString().length;
-      // const width = this.renderer.view.width - 5 * length - 15; // y offset
       const numTicks = this.renderer.view.height / resolution / 50;
       const ticks = this.volumeScale.ticks(numTicks);
       const precision = getFloatNumber(ticks[ticks.length - 1]);

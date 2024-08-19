@@ -240,7 +240,7 @@ export class Chart extends EventEmitter {
       .domain(volumeExtent)
       .range([this.height - resolution * AXIS_HEIGHT, 0]);
 
-    const numTicks = this.height / 50;
+    const numTicks = this.height / resolution / 50;
     let ticks = volumeScale.ticks(numTicks);
     let flag: boolean = false;
     if (ticks.every((el) => el === 0)) {
