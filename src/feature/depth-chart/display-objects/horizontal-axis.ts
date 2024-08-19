@@ -33,7 +33,8 @@ export class HorizontalAxis extends Container {
     resolution: number = 1,
     colors: HorizontalAxisColors,
   ) {
-    const numTicks = width / resolution / 200;
+    // const numTicks = width / resolution / 200;
+    const numTicks = 6;
     const ticks = scale.ticks(numTicks);
     const tickFormat = scale.tickFormat(numTicks);
 
