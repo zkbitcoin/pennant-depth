@@ -177,11 +177,7 @@ export const DepthChart = forwardRef(
       },
     }));
 
-    if (
-      (data.buy.length === 0 && data.sell.length === 0) ||
-      data.buy.every((el) => el.price === 0) ||
-      data.sell.every((el) => el.price === 0)
-    ) {
+    if (data.buy.length === 0 && data.sell.length === 0) {
       return (
         <div ref={styleRef} className={styles.container} data-theme={theme}>
           <NonIdealState title={notEnoughDataText} />
