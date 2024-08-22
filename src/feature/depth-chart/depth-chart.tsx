@@ -183,16 +183,16 @@ export const DepthChart = forwardRef(
           <NonIdealState title={notEnoughDataText} />
         </div>
       );
-    } else {
-      return (
-        <div ref={styleRef} className={styles.container} data-theme={theme}>
-          <div ref={resizeOberverRef} className={styles.canvasContainer}>
-            <canvas ref={contentsRef} className={styles.canvas} />
-            <canvas ref={uiRef} className={styles.canvas} />
-          </div>
-        </div>
-      );
     }
+
+    return (
+      <div ref={styleRef} className={styles.container} data-theme={theme}>
+        <div ref={resizeOberverRef} className={styles.canvasContainer}>
+          <canvas ref={contentsRef} className={styles.canvas} />
+          <canvas ref={uiRef} className={styles.canvas} />
+        </div>
+      </div>
+    );
   },
 );
 
