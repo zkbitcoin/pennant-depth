@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.7](https://github.com/SamChangi/pennant-depth/compare/v1.0.8...v1.0.7) (2024-08-22)
+
+
+### Bug Fixes
+
+* crosshair precision issue and y axis height when volumes are 0 ([d0658be](https://github.com/SamChangi/pennant-depth/commit/d0658be4ac3e8687f972eb36ee94341247665f4d))
+* listen price and volume format func changed ([f82b384](https://github.com/SamChangi/pennant-depth/commit/f82b38407f7e565f67c612c05cff56a8552e5f8f))
+
 ### [1.0.6](https://github.com/SamChangi/pennant-depth/compare/v1.0.8...v1.0.6) (2024-08-21)
 
 
