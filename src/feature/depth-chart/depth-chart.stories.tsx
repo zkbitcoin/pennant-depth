@@ -287,173 +287,6 @@ const zoomedOutData = {
   ],
 };
 
-const ATTP = {
-  sell: [
-    {
-      price: 59446.57,
-      volume: 5.73143,
-    },
-    {
-      price: 59446.58,
-      volume: 0.2086,
-    },
-    {
-      price: 59447.03,
-      volume: 0.0647,
-    },
-    {
-      price: 59447.14,
-      volume: 0.00022,
-    },
-    {
-      price: 59447.15,
-      volume: 0.3147,
-    },
-    {
-      price: 59447.5,
-      volume: 0.0671,
-    },
-    {
-      price: 59447.99,
-      volume: 0.2086,
-    },
-    {
-      price: 59448,
-      volume: 0.27119,
-    },
-    {
-      price: 59448.4,
-      volume: 0.1439,
-    },
-    {
-      price: 59448.63,
-      volume: 0.00127,
-    },
-    {
-      price: 59449.39,
-      volume: 0.04321,
-    },
-    {
-      price: 59449.4,
-      volume: 0.2639,
-    },
-    {
-      price: 59449.47,
-      volume: 0.04107,
-    },
-    {
-      price: 59449.72,
-      volume: 0.04107,
-    },
-    {
-      price: 59450,
-      volume: 0.41904,
-    },
-    {
-      price: 59451,
-      volume: 0.07301,
-    },
-    {
-      price: 59451.6,
-      volume: 0.00009,
-    },
-    {
-      price: 59451.81,
-      volume: 0.33634,
-    },
-    {
-      price: 59452,
-      volume: 0.07999,
-    },
-    {
-      price: 59452.02,
-      volume: 0.00041,
-    },
-  ],
-  buy: [
-    {
-      price: 59446.56,
-      volume: 1.03495,
-    },
-    {
-      price: 59446.45,
-      volume: 0.0001,
-    },
-    {
-      price: 59446.44,
-      volume: 0.00009,
-    },
-    {
-      price: 59446.43,
-      volume: 0.05888,
-    },
-    {
-      price: 59444.58,
-      volume: 0.11851,
-    },
-    {
-      price: 59444.08,
-      volume: 0.00039,
-    },
-    {
-      price: 59444.07,
-      volume: 0.33638,
-    },
-    {
-      price: 59444.03,
-      volume: 0.0168,
-    },
-    {
-      price: 59444,
-      volume: 0.09596,
-    },
-    {
-      price: 59443.99,
-      volume: 0.0168,
-    },
-    {
-      price: 59442.73,
-      volume: 0.08983,
-    },
-    {
-      price: 59442.04,
-      volume: 0.02,
-    },
-    {
-      price: 59442,
-      volume: 0.079,
-    },
-    {
-      price: 59441.07,
-      volume: 0.00027,
-    },
-    {
-      price: 59440.91,
-      volume: 0.21444,
-    },
-    {
-      price: 59440.9,
-      volume: 0.06,
-    },
-    {
-      price: 59440.5,
-      volume: 0.06728,
-    },
-    {
-      price: 59440.48,
-      volume: 0.01634,
-    },
-    {
-      price: 59440.14,
-      volume: 0.00041,
-    },
-    {
-      price: 59440,
-      volume: 0.07959,
-    },
-  ],
-};
-
 export const Binance: Story<DepthChartProps> = (args) => {
   const ref = useRef<DepthChartHandle>(null!);
   const dataRef = useRef<any>(null!);
@@ -465,74 +298,78 @@ export const Binance: Story<DepthChartProps> = (args) => {
     sell: [],
   });
 
-  // useEffect(() => {
-  //   const ws = new WebSocket("wss://stream.binance.com/stream");
-  //   ws.onopen = (event) => {
-  //     console.log("WS ==> connnect ok");
-  //     const msg = {
-  //       method: "SUBSCRIBE",
-  //       params: ["btcusdt@depth20@1000ms"],
-  //       id: 1,
-  //     };
-  //     ws.send(JSON.stringify(msg));
-  //   };
-  //   ws.onmessage = (event) => {
-  //     setIsLoading(false);
-  //     console.log("WS ==> Receiving messages from the server");
-  //     // console.log(event.data);
-  //     const wsData = JSON.parse(event.data);
-  //     const json = wsData.data;
-  //     setData({
-  //       sell: json.asks.map((ask: [string, string]) => ({
-  //         price: +ask[0],
-  //         volume: +ask[1],
-  //       })),
-  //       buy: json.bids.map((bid: [string, string]) => ({
-  //         price: +bid[0],
-  //         volume: +bid[1],
-  //       })),
-  //     });
-  //   };
-  //   ws.onerror = (event) => {
-  //     setIsLoading(false);
-  //     console.log("WS ==> ERROR");
-  //   };
+  useEffect(() => {
+    const ws = new WebSocket("wss://stream.binance.com/stream");
+    ws.onopen = (event) => {
+      console.log("WS ==> connnect ok");
+      const msg = {
+        method: "SUBSCRIBE",
+        params: ["btcusdt@depth20@1000ms"],
+        id: 1,
+      };
+      ws.send(JSON.stringify(msg));
+    };
+    ws.onmessage = (event) => {
+      setIsLoading(false);
+      // console.log("WS ==> Receiving messages from the server");
+      // console.log(event.data);
+      const wsData = JSON.parse(event.data);
+      if ("data" in wsData) {
+        const json = wsData.data;
+        if (json.asks.length > 0 && json.bids.length > 0) {
+          setData({
+            sell: json.asks.map((ask: [string, string]) => ({
+              price: +ask[0],
+              volume: 0,
+            })),
+            buy: json.bids.map((bid: [string, string]) => ({
+              price: +bid[0],
+              volume: +bid[1],
+            })),
+          });
+        }
+      }
+    };
+    ws.onerror = (event) => {
+      setIsLoading(false);
+      console.log("WS ==> ERROR");
+    };
 
-  //   return () => {
-  //     console.log("WS ==> disconnnect close");
-  //     ws.close();
-  //   };
-  // }, []);
+    return () => {
+      console.log("WS ==> disconnnect close");
+      ws.close();
+    };
+  }, []);
   // console.log("WS data ==>", data);
 
-  useInterval(() => {
-    async function fetchData() {
-      const res = await fetch(
-        `https://www.binance.com/api/v3/depth?symbol=BTCUSDT&limit=1000`,
-      );
+  // useInterval(() => {
+  //   async function fetchData() {
+  //     const res = await fetch(
+  //       `https://www.binance.com/api/v3/depth?symbol=BTCUSDT&limit=20`
+  //     );
 
-      const json = await res.json();
-      setData({
-        sell: orderBy(
-          json.asks.map((ask: [string, string]) => ({
-            price: +ask[0],
-            volume: +ask[1],
-          })),
-          ["price"],
-        ),
-        buy: orderBy(
-          json.bids.map((bid: [string, string]) => ({
-            price: +bid[0],
-            volume: +bid[1],
-          })),
-          ["price"],
-          ["desc"],
-        ),
-      });
-      setIsLoading(false);
-    }
-    fetchData();
-  }, 1000);
+  //     const json = await res.json();
+  //     setData({
+  //       sell: orderBy(
+  //         json.asks.map((ask: [string, string]) => ({
+  //           price: +ask[0],
+  //           volume: +ask[1],
+  //         })),
+  //         ["price"]
+  //       ),
+  //       buy: orderBy(
+  //         json.bids.map((bid: [string, string]) => ({
+  //           price: +bid[0],
+  //           volume: +bid[1],
+  //         })),
+  //         ["price"],
+  //         ["desc"]
+  //       ),
+  //     });
+  //     setIsLoading(false);
+  //   }
+  //   fetchData();
+  // }, 1000);
 
   const theme = useDarkMode() ? "dark" : "light";
 
@@ -550,7 +387,10 @@ export const Binance: Story<DepthChartProps> = (args) => {
           height: "300px",
         }}
       >
-        <DepthChart ref={ref} data={data} theme={theme} />
+        {data.sell.length > 0 && data.buy.length > 0 && (
+          <DepthChart ref={ref} data={data} theme={theme} />
+        )}
+        {/* <DepthChart ref={ref} data={data} theme={theme} /> */}
       </div>
       <div>
         <ul>
