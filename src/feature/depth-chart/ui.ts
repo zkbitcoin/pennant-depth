@@ -34,6 +34,7 @@ type UiColors = Pick<
   | "textPrimary"
   | "textSecondary"
   | "backgroundLabel"
+  | "overlay"
 >;
 
 function pointer(event: any) {
@@ -737,7 +738,7 @@ export class UI extends EventEmitter {
           0,
           buyNearestX,
           height - resolution * AXIS_HEIGHT,
-          this.colors.textPrimary,
+          this.colors.overlay,
         );
 
         this.sellOverlay.update(
@@ -746,7 +747,7 @@ export class UI extends EventEmitter {
           // width - sellNearestX - 30,
           width - sellNearestX,
           height - resolution * AXIS_HEIGHT,
-          this.colors.textPrimary,
+          this.colors.overlay,
         );
 
         // TODO: Changing visibility in groups like this suggests they should be in a Container

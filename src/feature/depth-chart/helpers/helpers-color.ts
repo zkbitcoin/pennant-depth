@@ -8,6 +8,7 @@ export interface Colors {
   backgroundSurface: number;
   textPrimary: number;
   textSecondary: number;
+  overlay: number;
   /**
    * Behind labels on axis, can be useful to prevent unclear numbers
    */
@@ -18,6 +19,7 @@ export function getColors(element: HTMLElement | null): Colors {
   const cssStyleDeclaration = element ? getComputedStyle(element) : null;
 
   return {
+    overlay: string2hex("#80AAB0BD"),
     buyFill: string2hex(
       cssStyleDeclaration
         ?.getPropertyValue("--pennant-color-depth-buy-fill")
