@@ -337,6 +337,12 @@ export const Binance: Story<DepthChartProps> = (args) => {
 
     return () => {
       console.log("WS ==> disconnnect close");
+      const msg = {
+        method: "UNSUBSCRIBE",
+        params: ["btcusdt@depth"],
+        id: 1,
+      };
+      ws.send(JSON.stringify(msg));
       ws.close();
     };
   }, []);
@@ -387,10 +393,12 @@ export const Binance: Story<DepthChartProps> = (args) => {
           height: "300px",
         }}
       >
-        {data.sell.length > 0 && data.buy.length > 0 && (
-          <DepthChart ref={ref} data={data} theme={theme} />
-        )}
-        {/* <DepthChart ref={ref} data={data} theme={theme} /> */}
+        <DepthChart
+          ref={ref}
+          data={data}
+          theme={theme}
+          volumeFormat={(volume: number) => numberFormatter(4).format(volume)}
+        />
       </div>
       <div>
         <ul>

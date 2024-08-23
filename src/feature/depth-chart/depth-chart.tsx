@@ -177,13 +177,13 @@ export const DepthChart = forwardRef(
       },
     }));
 
-    if (data.buy.length === 0 && data.sell.length === 0) {
-      return (
-        <div ref={styleRef} className={styles.container} data-theme={theme}>
-          <NonIdealState title={notEnoughDataText} />
-        </div>
-      );
-    }
+    // if (data.buy.length === 0 && data.sell.length === 0) {
+    //   return (
+    //     <div ref={styleRef} className={styles.container} data-theme={theme}>
+    //       <NonIdealState title={notEnoughDataText} />
+    //     </div>
+    //   );
+    // }
 
     return (
       <div ref={styleRef} className={styles.container} data-theme={theme}>
