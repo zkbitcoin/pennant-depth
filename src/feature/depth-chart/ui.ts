@@ -366,6 +366,7 @@ export class UI extends EventEmitter {
     midPriceTitle: string,
     priceScale: ScaleLinear<number, number>,
     volumeScale: ScaleLinear<number, number>,
+    domain: [number, number],
   ): void {
     this.prices = prices;
     this.volumes = volumes;
@@ -390,6 +391,7 @@ export class UI extends EventEmitter {
       height,
       resolution,
       this.colors,
+      domain,
     );
 
     this.verticalAxis.update(
