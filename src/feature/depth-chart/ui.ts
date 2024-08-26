@@ -623,7 +623,7 @@ export class UI extends EventEmitter {
               (resolution * this.buyPriceText.width) / 2 -
               resolution * 2,
           ),
-          height - (resolution * AXIS_HEIGHT) / 2 + 3,
+          height - (resolution * AXIS_HEIGHT) / 2 + 6,
           { x: 0.5, y: 0.5 },
           resolution,
           this.colors,
@@ -642,7 +642,7 @@ export class UI extends EventEmitter {
               (resolution * this.buyVolumeText.height) / 2 -
               2,
           ),
-          { x: 1, y: 0.5 },
+          { x: 0.5, y: 0.5 },
           resolution,
           this.colors,
         );
@@ -688,7 +688,7 @@ export class UI extends EventEmitter {
               (resolution * this.sellPriceText.width) / 2 +
               resolution * 2,
           ),
-          height - (resolution * AXIS_HEIGHT) / 2 + 3,
+          height - (resolution * AXIS_HEIGHT) / 2 + 6,
           { x: 0.5, y: 0.5 },
           resolution,
           this.colors,
@@ -708,7 +708,7 @@ export class UI extends EventEmitter {
               (resolution * this.sellVolumeText.height) / 2 -
               2,
           ),
-          { x: 0, y: 0.5 },
+          { x: 0.5, y: 0.5 },
           resolution,
           this.colors,
           "sell",

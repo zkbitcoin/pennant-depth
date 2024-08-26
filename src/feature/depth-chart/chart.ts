@@ -330,21 +330,21 @@ export class Chart extends EventEmitter {
       priceExtent,
     );
 
-    console.log(
-      this.width - 16 * size,
-      this.height,
-      this.prices.map((price) => priceScale(price)),
-      this.volumes.map((volume) =>
-        flag ? this.height - resolution * AXIS_HEIGHT : volumeScale(volume),
-      ),
-      midPrice,
-      this.priceLabels,
-      this.volumeLabels,
-      this.priceFormat(midPrice),
-      this._indicativePrice > 0 ? "Indicative price" : "Mid Market Price",
-      priceScale,
-      volumeScale,
-    );
+    // console.log(
+    //   this.width - 16 * size,
+    //   this.height,
+    //   this.prices.map((price) => priceScale(price)),
+    //   this.volumes.map((volume) =>
+    //     flag ? this.height - resolution * AXIS_HEIGHT : volumeScale(volume),
+    //   ),
+    //   midPrice,
+    //   this.priceLabels,
+    //   this.volumeLabels,
+    //   this.priceFormat(midPrice),
+    //   this._indicativePrice > 0 ? "Indicative price" : "Mid Market Price",
+    //   priceScale,
+    //   volumeScale,
+    // );
   }
 
   set colors(colors: Colors) {

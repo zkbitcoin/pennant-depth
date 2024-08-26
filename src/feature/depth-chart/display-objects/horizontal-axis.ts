@@ -62,11 +62,11 @@ export class HorizontalAxis extends Container {
       });
 
       text.x = scale(node);
-      text.y = height - (resolution * AXIS_HEIGHT) / 2 + 3;
+      text.y = height - (resolution * AXIS_HEIGHT) / 2 + 6;
       text.anchor.set(0.5, 0.5);
 
       tickMark.x = scale(node);
-      tickMark.y = height - (resolution * AXIS_HEIGHT) / 2 - 6;
+      tickMark.y = height - (resolution * AXIS_HEIGHT) / 2 - 12;
       tickMark.anchor.set(0.5, 0.5);
 
       text.updateText(); // TODO: Should not need to call th

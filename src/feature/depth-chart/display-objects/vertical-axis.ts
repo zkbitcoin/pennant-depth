@@ -60,7 +60,7 @@ export class VerticalAxis extends Container {
       const tickMark = new Text("-", {
         fill: colors.textSecondary,
         fontFamily: "monospace",
-        fontSize: 12,
+        fontSize: 10,
       });
 
       // text.x = width - resolution * 7;
