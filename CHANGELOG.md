@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.10](https://github.com/SamChangi/pennant-depth/compare/v1.0.9...v1.0.10) (2024-08-26)
+
+
+### Bug Fixes
+
+* add 0.5 size offset ([b936dad](https://github.com/SamChangi/pennant-depth/commit/b936dad8bfa659a3dc21cb64b830cbabb31ad743))
+* fully show volume label text ([f701b45](https://github.com/SamChangi/pennant-depth/commit/f701b45ad1c125281fc0b61740c7e9a3df6aecba))
+
 ### [1.0.9](https://github.com/SamChangi/pennant-depth/compare/v1.0.8...v1.0.9) (2024-08-23)
 
 
