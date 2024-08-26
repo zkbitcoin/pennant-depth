@@ -467,7 +467,7 @@ export class UI extends EventEmitter {
         ticks[ticks.length - 1]?.toLocaleString("en-IN", {
           maximumFractionDigits: precision,
           minimumFractionDigits: precision,
-        }).length + 0.5;
+        }).length + 0.8;
       // console.log("====", size);
       const width = this.renderer.view.width - 16 * size;
       const height = this.renderer.view.height;

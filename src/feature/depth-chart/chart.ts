@@ -211,8 +211,8 @@ export class Chart extends EventEmitter {
           ),
         ) ?? 0;
 
-      this.initialSpan = this.initialPriceDifference / this.maxPriceDifference;
-      this._span = this.initialSpan;
+      // this.initialSpan = this.initialPriceDifference / this.maxPriceDifference;
+      // this._span = this.initialSpan;
     }
 
     const priceExtent: [number, number] = [
@@ -246,13 +246,14 @@ export class Chart extends EventEmitter {
     if (ticks.every((el) => el === 0)) {
       flag = true;
     }
+    // console.log("**VOLUME**", ticks[ticks.length - 1]);
     const precision = getFloatNumber(ticks[ticks.length - 1]);
     // console.log("**precs**", precision);
     const size =
       ticks[ticks.length - 1]?.toLocaleString("en-IN", {
         maximumFractionDigits: precision,
         minimumFractionDigits: precision,
-      }).length + 0.5;
+      }).length + 0.8;
     // console.log("==size==", size);
     const priceScale = scaleLinear()
       .domain(priceExtent)
