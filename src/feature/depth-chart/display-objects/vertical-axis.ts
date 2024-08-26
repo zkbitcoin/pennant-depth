@@ -26,6 +26,18 @@ export class VerticalAxis extends Container {
     super();
   }
 
+  private formatNumber(num: number) {
+    if (num >= 1000) {
+      return Intl.NumberFormat("en-US", {
+        notation: "compact",
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 2,
+      }).format(num);
+    } else {
+      return num + "";
+    }
+  }
+
   public update(
     scale: ScaleLinear<number, number>,
     width: number,
@@ -35,14 +47,15 @@ export class VerticalAxis extends Container {
   ) {
     const numTicks = height / resolution / 50;
     const ticks = scale.ticks(numTicks).filter((tick) => tick !== 0);
+    // console.log("**VOLUMES**", ticks);
+    // console.log("**VOLUMES**", formatTicks);
     // const length = ticks[ticks.length - 1]?.toLocaleString().length;
     // const yOffset = 5 * length + 20;
-    const tickFormat = scale.tickFormat(numTicks);
-
+    const tickFormat = scale.tickFormat(numTicks); // number toString func, add comma if larger than 1000
     const enter = ticks.filter(
       (tick) => !this.nodeByKeyValue.has(tickFormat(tick)),
     );
-
+    // console.log("**VOLUME enters**", enter.map(et => tickFormat(et)));
     const update = ticks.filter((tick) =>
       this.nodeByKeyValue.has(tickFormat(tick)),
     );
@@ -52,7 +65,7 @@ export class VerticalAxis extends Container {
     );
 
     for (const node of enter) {
-      const text = new Text(tickFormat(node), {
+      const text = new Text(this.formatNumber(node), {
         fill: colors.textSecondary,
         fontFamily: "monospace",
         fontSize: FONT_SIZE,

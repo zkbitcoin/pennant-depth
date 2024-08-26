@@ -246,14 +246,31 @@ export class Chart extends EventEmitter {
     if (ticks.every((el) => el === 0)) {
       flag = true;
     }
-    // console.log("**VOLUME**", ticks[ticks.length - 1]);
-    const precision = getFloatNumber(ticks[ticks.length - 1]);
+    const lgNumber = ticks[ticks.length - 1];
+    const formatTicks = ticks.map((num) => {
+      let numStr = "";
+      if (num >= 1000) {
+        numStr = Intl.NumberFormat("en-US", {
+          notation: "compact",
+          maximumFractionDigits: 2,
+          minimumFractionDigits: 2,
+        }).format(num);
+      } else {
+        numStr = num + "";
+      }
+      return numStr;
+    });
+    // console.log("**VOLUME**", formatTicks[formatTicks.length - 1]);
+    const precision = getFloatNumber(lgNumber);
     // console.log("**precs**", precision);
+    // console.log('**KM**', formatTicks[formatTicks.length - 1]?.length);
     const size =
-      ticks[ticks.length - 1]?.toLocaleString("en-IN", {
-        maximumFractionDigits: precision,
-        minimumFractionDigits: precision,
-      }).length + 0.8;
+      lgNumber >= 1000
+        ? formatTicks[formatTicks.length - 1]?.length + 0.8
+        : lgNumber?.toLocaleString("en-US", {
+            maximumFractionDigits: precision,
+            minimumFractionDigits: precision,
+          }).length + 0.8;
     // console.log("==size==", size);
     const priceScale = scaleLinear()
       .domain(priceExtent)

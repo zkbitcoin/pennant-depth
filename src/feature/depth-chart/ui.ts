@@ -462,12 +462,30 @@ export class UI extends EventEmitter {
       //   .filter((tick) => tick !== 0);
       const numTicks = this.renderer.view.height / resolution / 50;
       const ticks = this.volumeScale.ticks(numTicks);
-      const precision = getFloatNumber(ticks[ticks.length - 1]);
+      const lgNumber = ticks[ticks.length - 1];
+      const formatTicks = ticks.map((num) => {
+        let numStr = "";
+        if (num >= 1000) {
+          numStr = Intl.NumberFormat("en-US", {
+            notation: "compact",
+            maximumFractionDigits: 2,
+            minimumFractionDigits: 2,
+          }).format(num);
+        } else {
+          numStr = num + "";
+        }
+        return numStr;
+      });
+      // console.log("**VOLUME**", formatTicks[formatTicks.length - 1]);
+      const precision = getFloatNumber(lgNumber);
+
       const size =
-        ticks[ticks.length - 1]?.toLocaleString("en-IN", {
-          maximumFractionDigits: precision,
-          minimumFractionDigits: precision,
-        }).length + 0.8;
+        lgNumber >= 1000
+          ? formatTicks[formatTicks.length - 1]?.length + 0.8
+          : lgNumber?.toLocaleString("en-US", {
+              maximumFractionDigits: precision,
+              minimumFractionDigits: precision,
+            }).length + 0.8;
       // console.log("====", size);
       const width = this.renderer.view.width - 16 * size;
       const height = this.renderer.view.height;
