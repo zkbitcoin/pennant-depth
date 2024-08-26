@@ -248,10 +248,11 @@ export class Chart extends EventEmitter {
     }
     const precision = getFloatNumber(ticks[ticks.length - 1]);
     // console.log("**precs**", precision);
-    const size = ticks[ticks.length - 1]?.toLocaleString("en-IN", {
-      maximumFractionDigits: precision,
-      minimumFractionDigits: precision,
-    }).length;
+    const size =
+      ticks[ticks.length - 1]?.toLocaleString("en-IN", {
+        maximumFractionDigits: precision,
+        minimumFractionDigits: precision,
+      }).length + 0.5;
     // console.log("==size==", size);
     const priceScale = scaleLinear()
       .domain(priceExtent)

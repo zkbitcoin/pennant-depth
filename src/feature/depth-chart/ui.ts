@@ -463,10 +463,11 @@ export class UI extends EventEmitter {
       const numTicks = this.renderer.view.height / resolution / 50;
       const ticks = this.volumeScale.ticks(numTicks);
       const precision = getFloatNumber(ticks[ticks.length - 1]);
-      const size = ticks[ticks.length - 1]?.toLocaleString("en-IN", {
-        maximumFractionDigits: precision,
-        minimumFractionDigits: precision,
-      }).length;
+      const size =
+        ticks[ticks.length - 1]?.toLocaleString("en-IN", {
+          maximumFractionDigits: precision,
+          minimumFractionDigits: precision,
+        }).length + 0.5;
       // console.log("====", size);
       const width = this.renderer.view.width - 16 * size;
       const height = this.renderer.view.height;
