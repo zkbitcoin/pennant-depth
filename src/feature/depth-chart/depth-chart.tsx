@@ -139,7 +139,9 @@ export const DepthChart = forwardRef(
     }, [priceFormat, volumeFormat]);
 
     useEffect(() => {
+      // chartRef.current.initialPriceDifference = 0;
       chartRef.current.span = 1;
+      chartRef.current.axis.transform = 1;
     }, [pairCode]);
 
     // Update chart when dimensions or data change

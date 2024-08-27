@@ -111,7 +111,7 @@ export class UI extends EventEmitter {
   /**
    * The current scale.
    */
-  private transform: number = 1;
+  public transform: number = 1;
 
   private horizontalAxis: HorizontalAxis = new HorizontalAxis();
   private verticalAxis: VerticalAxis = new VerticalAxis();

@@ -31,7 +31,7 @@ const PRICE_VOLUME_RATIO_THRESHOLD = 100; // 价量比阈值, 用于检测异常
 
 export class Chart extends EventEmitter {
   private chart: Contents;
-  private axis: UI;
+  public axis: UI;
 
   private prices: number[] = [];
   private volumes: number[] = [];
@@ -210,8 +210,8 @@ export class Chart extends EventEmitter {
             Math.abs(priceLevel.price - midPrice),
           ),
         ) ?? 0;
-
-      this.initialSpan = this.initialPriceDifference / this.maxPriceDifference;
+      this.initialSpan = 1;
+      // this.initialSpan = this.initialPriceDifference / this.maxPriceDifference;
       // this._span = this.initialSpan;
     }
 

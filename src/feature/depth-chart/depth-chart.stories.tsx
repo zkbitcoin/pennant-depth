@@ -425,6 +425,7 @@ export const Binance: Story<DepthChartProps> = (args) => {
 };
 
 const Template: Story<DepthChartProps> = (args) => {
+  const [code, setCode] = useState("");
   const ref = useRef<DepthChartHandle>(null!);
   const darkmode = useDarkMode();
 
@@ -435,7 +436,19 @@ const Template: Story<DepthChartProps> = (args) => {
         height: "40vh",
       }}
     >
-      <DepthChart ref={ref} {...args} theme={darkmode ? "dark" : "light"} />
+      <DepthChart
+        ref={ref}
+        {...args}
+        theme={darkmode ? "dark" : "light"}
+        pairCode={code}
+      />
+      <button
+        onClick={() => {
+          setCode(Math.random() + "");
+        }}
+      >
+        tap me
+      </button>
     </div>
   );
 };
