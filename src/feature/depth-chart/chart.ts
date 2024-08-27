@@ -212,7 +212,7 @@ export class Chart extends EventEmitter {
         ) ?? 0;
 
       this.initialSpan = this.initialPriceDifference / this.maxPriceDifference;
-      this._span = this.initialSpan;
+      // this._span = this.initialSpan;
     }
 
     const priceExtent: [number, number] = [
