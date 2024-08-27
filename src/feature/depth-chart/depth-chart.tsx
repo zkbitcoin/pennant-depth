@@ -60,6 +60,11 @@ export type DepthChartProps = {
    * Light or dark theme
    */
   theme?: ThemeVariant;
+
+  /**
+   * Common crypto trading pairs
+   */
+  pairCode?: string;
 };
 
 export interface DepthChartHandle {
@@ -84,6 +89,7 @@ export const DepthChart = forwardRef(
       midPrice = 0,
       notEnoughDataText = "No data",
       theme = "dark",
+      pairCode,
     }: DepthChartProps,
     ref: React.Ref<DepthChartHandle>,
   ) => {
@@ -131,6 +137,10 @@ export const DepthChart = forwardRef(
         chartRef.current.volumeFormat = volumeFormat;
       }
     }, [priceFormat, volumeFormat]);
+
+    useEffect(() => {
+      chartRef.current.span = 1;
+    }, [pairCode]);
 
     // Update chart when dimensions or data change
     useEffect(() => {
