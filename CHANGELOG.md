@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.4](https://github.com/SamChangi/pennant-depth/compare/v1.1.3...v1.1.4) (2024-08-27)
+
+
+### Bug Fixes
+
+* zoom scale cached issue after chart reflash ([e42723d](https://github.com/SamChangi/pennant-depth/commit/e42723db2cf4f30194d04fbf6b4df5744d1a74b2))
+
 ### [1.1.3](https://github.com/SamChangi/pennant-depth/compare/v1.1.2...v1.1.3) (2024-08-27)
 
 ### [1.1.2](https://github.com/SamChangi/pennant-depth/compare/v1.1.1...v1.1.2) (2024-08-27)
