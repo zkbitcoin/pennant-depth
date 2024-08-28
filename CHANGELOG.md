@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.5](https://github.com/SamChangi/pennant-depth/compare/v1.1.4...v1.1.5) (2024-08-28)
+
+
+### Bug Fixes
+
+* get longest string, increase stroke width ([94b0dec](https://github.com/SamChangi/pennant-depth/commit/94b0decfd701d2f251c290d05454a97a3b0764b0))
+
 ### [1.1.4](https://github.com/SamChangi/pennant-depth/compare/v1.1.3...v1.1.4) (2024-08-27)
 
 
