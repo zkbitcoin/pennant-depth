@@ -484,7 +484,7 @@ export class UI extends EventEmitter {
       const descFmtStrs = formatTicks.sort((a, b) => b.length - a.length);
       const size = descFmtStrs[0]?.length + 0.8;
       // console.log("====", size);
-      const width = this.renderer.view.width - 16 * size;
+      const width = this.renderer.view.width - resolution * 8 * size;
       const height = this.renderer.view.height;
 
       // In auction mode. Curves will in general overlap
@@ -647,7 +647,7 @@ export class UI extends EventEmitter {
         // console.log(this.volumeLabels[buyIndex]);
         this.buyVolumeText.update(
           this.volumeLabels[buyIndex],
-          this.buyVolumeText.width,
+          0,
           Math.min(
             Math.max(
               this.volumes[buyIndex],
@@ -658,7 +658,7 @@ export class UI extends EventEmitter {
               (resolution * this.buyVolumeText.height) / 2 -
               2,
           ),
-          { x: 0.5, y: 0.5 },
+          { x: 0, y: 0.5 },
           resolution,
           this.colors,
         );
@@ -713,7 +713,7 @@ export class UI extends EventEmitter {
 
         this.sellVolumeText.update(
           this.volumeLabels[sellIndex],
-          width - this.sellVolumeText.width,
+          width,
           Math.min(
             Math.max(
               this.volumes[sellIndex],
@@ -724,7 +724,7 @@ export class UI extends EventEmitter {
               (resolution * this.sellVolumeText.height) / 2 -
               2,
           ),
-          { x: 0.5, y: 0.5 },
+          { x: 1, y: 0.5 },
           resolution,
           this.colors,
           "sell",

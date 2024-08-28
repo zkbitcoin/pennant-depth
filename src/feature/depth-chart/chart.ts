@@ -272,7 +272,7 @@ export class Chart extends EventEmitter {
     // console.log("==size==", size);
     const priceScale = scaleLinear()
       .domain(priceExtent)
-      .range([0, this.width - 16 * size]);
+      .range([0, this.width - resolution * 8 * size]);
 
     // Add dummy data points at extreme points of price range
     // to ensure the chart looks symmetric
@@ -302,7 +302,7 @@ export class Chart extends EventEmitter {
         priceScale(point[0]),
         flag ? this.height - resolution * AXIS_HEIGHT : volumeScale(point[1]),
       ]),
-      16 * size,
+      resolution * 8 * size,
     );
 
     // TODO: Clean up this logic
@@ -331,7 +331,7 @@ export class Chart extends EventEmitter {
     this.axis.colors = this._colors;
 
     this.axis.update(
-      this.width - 16 * size,
+      this.width - resolution * 8 * size,
       this.height,
       this.prices.map((price) => priceScale(price)),
       this.volumes.map((volume) =>
