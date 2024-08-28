@@ -77,7 +77,7 @@ export class VerticalAxis extends Container {
       });
 
       // text.x = width - resolution * 7;
-      text.x = width + 10;
+      text.x = width + 5 * resolution;
       text.y = scale(node);
       text.anchor.set(0, 0.5);
 
@@ -100,7 +100,7 @@ export class VerticalAxis extends Container {
 
       text.style.fill = colors.textSecondary;
       // text.x = width - resolution * 7;
-      text.x = width + 10;
+      text.x = width + 5 * resolution;
       text.y = scale(node);
 
       // tm.x = width - resolution * 7 + 10;

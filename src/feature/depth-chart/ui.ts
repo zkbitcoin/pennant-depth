@@ -639,7 +639,7 @@ export class UI extends EventEmitter {
               (resolution * this.buyPriceText.width) / 2 -
               resolution * 2,
           ),
-          height - (resolution * AXIS_HEIGHT) / 2 + 6,
+          height - (resolution * AXIS_HEIGHT) / 2 + 3 * resolution,
           { x: 0.5, y: 0.5 },
           resolution,
           this.colors,
@@ -704,7 +704,7 @@ export class UI extends EventEmitter {
               (resolution * this.sellPriceText.width) / 2 +
               resolution * 2,
           ),
-          height - (resolution * AXIS_HEIGHT) / 2 + 6,
+          height - (resolution * AXIS_HEIGHT) / 2 + 3 * resolution,
           { x: 0.5, y: 0.5 },
           resolution,
           this.colors,
