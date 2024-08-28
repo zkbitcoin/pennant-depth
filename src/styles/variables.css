@@ -166,7 +166,7 @@
 
   /* Dimensions. */
   --pennant-candlestick-stroke-width: 1px;
-  --pennant-depth-stroke-width: 2px;
+  --pennant-depth-stroke-width: 4px;
 
   /* Label bg */
   --pennant-background-label-color: var(--pennant-background-surface-color);

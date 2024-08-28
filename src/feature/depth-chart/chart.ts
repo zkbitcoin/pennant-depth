@@ -246,7 +246,7 @@ export class Chart extends EventEmitter {
     if (ticks.every((el) => el === 0)) {
       flag = true;
     }
-    const lgNumber = ticks[ticks.length - 1];
+    // const lgNumber = ticks[ticks.length - 1];
     const formatTicks = ticks.map((num) => {
       let numStr = "";
       if (num >= 1000) {
@@ -256,21 +256,19 @@ export class Chart extends EventEmitter {
           minimumFractionDigits: 2,
         }).format(num);
       } else {
-        numStr = num + "";
+        const precision = getFloatNumber(num);
+        numStr = num.toLocaleString("en-US", {
+          maximumFractionDigits: precision,
+          minimumFractionDigits: precision,
+        });
       }
       return numStr;
     });
+    const descFmtStrs = formatTicks.sort((a, b) => b.length - a.length);
     // console.log("**VOLUME**", formatTicks[formatTicks.length - 1]);
-    const precision = getFloatNumber(lgNumber);
     // console.log("**precs**", precision);
     // console.log('**KM**', formatTicks[formatTicks.length - 1]?.length);
-    const size =
-      lgNumber >= 1000
-        ? formatTicks[formatTicks.length - 1]?.length + 0.8
-        : lgNumber?.toLocaleString("en-US", {
-            maximumFractionDigits: precision,
-            minimumFractionDigits: precision,
-          }).length + 0.8;
+    const size = descFmtStrs[0]?.length + 0.8;
     // console.log("==size==", size);
     const priceScale = scaleLinear()
       .domain(priceExtent)

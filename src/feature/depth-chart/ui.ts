@@ -472,20 +472,17 @@ export class UI extends EventEmitter {
             minimumFractionDigits: 2,
           }).format(num);
         } else {
-          numStr = num + "";
+          const precision = getFloatNumber(num);
+          numStr = num.toLocaleString("en-US", {
+            maximumFractionDigits: precision,
+            minimumFractionDigits: precision,
+          });
         }
         return numStr;
       });
       // console.log("**VOLUME**", formatTicks[formatTicks.length - 1]);
-      const precision = getFloatNumber(lgNumber);
-
-      const size =
-        lgNumber >= 1000
-          ? formatTicks[formatTicks.length - 1]?.length + 0.8
-          : lgNumber?.toLocaleString("en-US", {
-              maximumFractionDigits: precision,
-              minimumFractionDigits: precision,
-            }).length + 0.8;
+      const descFmtStrs = formatTicks.sort((a, b) => b.length - a.length);
+      const size = descFmtStrs[0]?.length + 0.8;
       // console.log("====", size);
       const width = this.renderer.view.width - 16 * size;
       const height = this.renderer.view.height;
