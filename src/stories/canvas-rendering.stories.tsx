@@ -5,6 +5,9 @@ import { scaleLinear, scaleTime } from "d3-scale";
 import { select } from "d3-selection";
 import { useEffect, useRef } from "react";
 
+
+import { D3fcCanvas } from "../../src/ui/components/plot-container/D3fcWrappers";
+
 export default {
   title: "Elements/Pixel perfection",
 } as Meta;
@@ -66,11 +69,11 @@ export const PixelPerfectCandles: Story = () => {
 
   return (
     <div>
-      <d3fc-canvas
-        ref={ref}
-        style={{ width: "400px", height: "400px" }}
-        use-device-pixel-ratio
-      ></d3fc-canvas>
+        <D3fcCanvas
+            ref={ref}
+            style={{ width: "400px", height: "400px" }}
+            use-device-pixel-ratio
+        />
       <canvas
         ref={zoomRef}
         width={400}

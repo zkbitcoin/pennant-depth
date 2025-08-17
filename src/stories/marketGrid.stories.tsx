@@ -50,30 +50,28 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const Grid: Story = () => {
-  const { data, loading } = useQuery<MarketsQuery, MarketsQueryVariables>(
-    MarketsDocument,
-    { fetchPolicy: "no-cache" },
-  );
+const Grid = () => {
+    const { data, loading } = useQuery<MarketsQuery, MarketsQueryVariables>(
+        MarketsDocument,
+        { fetchPolicy: "no-cache" },
+    );
 
-  if (
-    loading ||
-    typeof data === "undefined" ||
-    data.marketsConnection === undefined ||
-    data.marketsConnection === null
-  ) {
-    return <div>Loading</div>;
-  }
+    if (
+        loading ||
+        !data?.marketsConnection
+    ) {
+        return <div>Loading</div>;
+    }
 
-  return (
-    <MarketGrid
-      markets={data.marketsConnection.edges.map((edge) => edge.node)}
-    />
-  );
+    return (
+        <MarketGrid
+            markets={data.marketsConnection.edges.map((edge) => edge.node)}
+        />
+    );
 };
 
 export const Simple = () => (
-  <ApolloProvider client={client}>
-    <Grid />
-  </ApolloProvider>
+    <ApolloProvider client={client}>
+        <Grid />
+    </ApolloProvider>
 );

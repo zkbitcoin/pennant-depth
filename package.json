@@ -40,8 +40,8 @@
     "@types/d3-zoom": "^2.0.0",
     "@types/lodash": "^4.14.168",
     "@types/node": "^18.0.0",
-    "@types/react": "^18.0.14",
-    "@types/react-dom": "^18.0.5",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
     "@types/react-virtualized-auto-sizer": "^1.0.0",
     "allotment": "1.19.0",
     "chroma-js": "^2.4.2",
@@ -126,7 +126,7 @@
     "@types/d3-delaunay": "6.0.1",
     "@types/d3-format": "2.0.2",
     "@types/jest": "29.5.3",
-    "@types/react-test-renderer": "18.0.0",
+    "@types/react-test-renderer": "^19.1.0",
     "@types/resize-observer-browser": "0.1.7",
     "@typescript-eslint/parser": "6.2.1",
     "babel-jest": "29.6.2",
@@ -147,10 +147,10 @@
     "lint-staged": "13.2.3",
     "postcss": "8.4.27",
     "prettier": "3.0.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "react-popper": "2.3.0",
-    "react-test-renderer": "18.2.0",
+    "react-test-renderer": "^19.1.1",
     "rollup": "3.26.2",
     "rollup-plugin-postcss": "4.0.2",
     "rollup-plugin-tsconfig-paths": "1.5.1",
@@ -168,10 +168,11 @@
   },
   "peerDependencies": {
     "@babel/runtime": "^7.13.10",
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.1.1",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.1.1"
   },
   "resolutions": {
     "d3-array": "2.3.3"
-  }
+  },
+  "packageManager": "yarn@4.9.2+sha512.1fc009bc09d13cfd0e19efa44cbfc2b9cf6ca61482725eb35bbc5e257e093ebf4130db6dfe15d604ff4b79efd8e1e8e99b25fa7d0a6197c9f9826358d4d65c3c"
 }

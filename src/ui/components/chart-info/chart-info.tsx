@@ -17,7 +17,7 @@ export const ChartInfo = ({ bounds }: ChartInfoProps) => {
     : format(bounds[1], DATE_FORMAT);
 
   return (
-    <div className="chart-info-wrapper">
+      <div className="chart-info-wrapper" data-testid="chart-info-wrapper">
       <div>
         <span>{fromDate}</span>
         <span className="text-muted"> to </span>

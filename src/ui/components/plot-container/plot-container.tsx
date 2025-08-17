@@ -29,6 +29,8 @@ import { Colors } from "../../../feature/candlestick-chart/helpers";
 import { XAxisView } from "..";
 import { PaneView } from "../pane-view";
 
+import { D3fcGroup, D3fcCanvas, D3fcSVG } from "./D3fcWrappers";
+
 export type PlotContainerProps = {
   width: number;
   height: number;
@@ -145,21 +147,22 @@ export const PlotContainer = forwardRef<
       [onViewportChanged],
     );
 
-    const refs = useMemo(
-      () =>
-        scenegraph.panes
-          .map((pane) => pane.id)
-          .reduce(
-            (acc, value) => {
-              acc[value] = createRef<HTMLDivElement>();
-              return acc;
-            },
-            {} as { [index: string]: React.RefObject<HTMLDivElement> },
-          ),
-      [scenegraph.panes],
-    );
+      const refs = useMemo(
+          () =>
+              scenegraph.panes
+                  .map((pane) => pane.id)
+                  .reduce(
+                      (acc, value) => {
+                          acc[value] = createRef<HTMLDivElement | null>();
+                          return acc;
+                      },
+                      {} as { [index: string]: React.RefObject<HTMLDivElement | null> },
+                  ),
+          [scenegraph.panes],
+      );
 
-    const chartElement = useRef<Core | null>(null);
+
+      const chartElement = useRef<Core | null>(null);
 
     useEffect(() => {
       chartElement.current = new Core(
@@ -275,55 +278,53 @@ export const PlotContainer = forwardRef<
       allotmentRef.current.reset();
     }, [numPanes, studySize]);
 
-    return (
-      <d3fc-group ref={chartRef} class="plot-container__chart">
-        <Allotment
-          ref={allotmentRef}
-          minSize={20}
-          vertical
-          proportionalLayout={false}
-          onChange={(sizes) => {
-            throttleRequestRedraw();
-            onChangePane(sizes);
-          }}
-        >
-          {scenegraph.panes.map((pane, index) => {
-            const isMain = index === 0;
-            // get size from studySizes option, skip main as that should
-            // always render greedily
-            const size = isMain ? undefined : studySizes[index - 1];
-            const preferredSize = calculatePreferredSize(
-              size,
-              studySize,
-              numPanes,
-              isMain,
-            );
-            return (
-              <Allotment.Pane
-                key={pane.id}
-                preferredSize={preferredSize}
-                priority={isMain ? LayoutPriority.High : LayoutPriority.Low}
+      return (
+          <D3fcGroup ref={chartRef} className="plot-container__chart">
+              <Allotment
+                  ref={allotmentRef}
+                  minSize={20}
+                  vertical
+                  proportionalLayout={false}
+                  onChange={(sizes) => {
+                      throttleRequestRedraw();
+                      onChangePane(sizes);
+                  }}
               >
-                <PaneView
-                  ref={refs[pane.id]}
-                  bounds={bounds}
-                  colors={colors}
-                  dataIndex={dataIndex}
-                  decimalPlaces={decimalPlaces}
-                  positionDecimalPlaces={positionDecimalPlaces}
-                  priceMonitoringBounds={priceMonitoringBounds}
-                  overlays={overlays}
-                  pane={pane}
-                  simple={simple}
-                  onClosePane={onClosePane}
-                  onRemoveOverlay={onRemoveOverlay}
-                />
-              </Allotment.Pane>
-            );
-          })}
-        </Allotment>
-        <XAxisView ref={xAxisRef} simple={simple} />
-      </d3fc-group>
-    );
+                  {scenegraph.panes.map((pane, index) => {
+                      const isMain = index === 0;
+                      const size = isMain ? undefined : studySizes[index - 1];
+                      const preferredSize = calculatePreferredSize(
+                          size,
+                          studySize,
+                          numPanes,
+                          isMain
+                      );
+                      return (
+                          <Allotment.Pane
+                              key={pane.id}
+                              preferredSize={preferredSize}
+                              priority={isMain ? LayoutPriority.High : LayoutPriority.Low}
+                          >
+                              <PaneView
+                                  ref={refs[pane.id]}
+                                  bounds={bounds}
+                                  colors={colors}
+                                  dataIndex={dataIndex}
+                                  decimalPlaces={decimalPlaces}
+                                  positionDecimalPlaces={positionDecimalPlaces}
+                                  priceMonitoringBounds={priceMonitoringBounds}
+                                  overlays={overlays}
+                                  pane={pane}
+                                  simple={simple}
+                                  onClosePane={onClosePane}
+                                  onRemoveOverlay={onRemoveOverlay}
+                              />
+                          </Allotment.Pane>
+                      );
+                  })}
+              </Allotment>
+              <XAxisView ref={xAxisRef} simple={simple} />
+          </D3fcGroup>
+      );
   },
 );

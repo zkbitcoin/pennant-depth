@@ -1,15 +1,63 @@
-import renderer from "react-test-renderer";
-
+import React from "react";
+import "@testing-library/jest-dom";
+import { render, screen, act } from "@testing-library/react";
 import { IndicatorInfo } from "./indicator-info";
 
-test("IndicatorInfo renders correctly", () => {
-  const component = renderer.create(
-    <IndicatorInfo
-      title="RSI"
-      info={[{ id: "index", label: "", value: "100" }]}
-    />,
-  );
+describe("IndicatorInfo component", () => {
+    const infoData = [
+        { id: "index", label: "RSI", value: "100", displayWhileNoTrading: true },
+    ];
 
-  let tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+    test("renders correctly with noTrading=false", () => {
+        let container: HTMLElement;
+        act(() => {
+            ({ container } = render(<IndicatorInfo title="RSI" info={infoData} noTrading={false} />));
+        });
+
+        const wrapper = screen.getByTestId("indicator-info-wrapper");
+
+        // Check that the flattened text content contains the correct strings
+        expect(wrapper.textContent).toContain("RSI");
+        expect(wrapper.textContent).toContain("100");
+        expect(wrapper.textContent).not.toContain("No trading");
+
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    test("renders correctly with noTrading=true", () => {
+        let container: HTMLElement;
+        act(() => {
+            ({ container } = render(<IndicatorInfo title="RSI" info={infoData} noTrading={true} />));
+        });
+
+        const wrapper = screen.getByTestId("indicator-info-wrapper");
+
+        expect(wrapper.textContent).toContain("RSI");
+        expect(wrapper.textContent).toContain("100");
+        expect(wrapper.textContent).toContain("No trading");
+
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    test("renders close button if closeable=true", () => {
+        const onCloseMock = jest.fn();
+        act(() => {
+            render(
+                <IndicatorInfo
+                    title="RSI"
+                    info={infoData}
+                    noTrading={false}
+                    closeable={true}
+                    onClose={onCloseMock}
+                />
+            );
+        });
+
+        const closeButton = screen.getByTitle("Remove");
+        expect(closeButton).toBeInTheDocument();
+
+        // simulate click
+        closeButton.click();
+        expect(onCloseMock).toHaveBeenCalled();
+    });
 });

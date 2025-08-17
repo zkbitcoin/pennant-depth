@@ -1,16 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`IndicatorInfo renders correctly 1`] = `
+exports[`IndicatorInfo component renders correctly with noTrading=false 1`] = `
 <div
-  className="indicator-info-wrapper"
+  class="indicator-info-wrapper"
+  data-testid="indicator-info-wrapper"
 >
   <span
-    className="text-muted"
+    class="text-muted"
   >
     RSI: 
   </span>
+  <div
+    class="indicator-info__item"
+  >
+    <span
+      class="text-muted"
+    >
+      RSI 
+    </span>
+    <span
+      class="monospace-text"
+    >
+      100
+    </span>
+  </div>
+</div>
+`;
+
+exports[`IndicatorInfo component renders correctly with noTrading=true 1`] = `
+<div
+  class="indicator-info-wrapper"
+  data-testid="indicator-info-wrapper"
+>
   <span
-    className="text-muted"
+    class="text-muted"
+  >
+    RSI: 
+  </span>
+  <div
+    class="indicator-info__item"
+  >
+    <span
+      class="text-muted"
+    >
+      RSI 
+    </span>
+    <span
+      class="monospace-text"
+    >
+      100
+    </span>
+  </div>
+  <span
+    class="text-muted"
   >
     No trading
   </span>

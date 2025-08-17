@@ -11,6 +11,8 @@ import {
 } from "../../../feature/candlestick-chart/helpers";
 import { CloseButton, IndicatorInfo } from "..";
 import { getIntent, getStudyInfoFieldValue, studyInfoFields } from "./helpers";
+import {D3fcSVG} from "../plot-container/D3fcWrappers";
+import {D3fcCanvas} from "../plot-container/D3fcWrappers"
 
 export type PaneViewProps = {
   bounds: Bounds | null;
@@ -64,20 +66,20 @@ export const PaneView = forwardRef<HTMLDivElement, PaneViewProps>(
         onMouseOver={() => setShowPaneControls(pane.id)}
         onMouseOut={() => setShowPaneControls(null)}
       >
-        <d3fc-canvas class="plot-area" use-device-pixel-ratio />
-        {!simple && <d3fc-svg class="plot-area-interaction" />}
+        <D3fcCanvas className="plot-area" use-device-pixel-ratio />
+        {!simple && <D3fcSVG className="plot-area-interaction" />}
         <div className="plot-area-annotations" />
-        <d3fc-canvas
-          class="y-axis"
-          use-device-pixel-ratio
-          style={{ width: simple ? 0 : "100%" }}
-        />
-        <d3fc-svg
-          class="y-axis-interaction"
-          style={{
-            width: simple ? 0 : `${Y_AXIS_WIDTH}px`,
-          }}
-        />
+          <D3fcCanvas
+              className="y-axis"
+              use-device-pixel-ratio
+              style={{ width: simple ? 0 : "100%" }}
+          />
+          <D3fcSVG
+              className="y-axis-interaction"
+              style={{
+                  width: simple ? 0 : `${Y_AXIS_WIDTH}px`,
+              }}
+          />
         {pane.id !== "main" && !simple && (
           <div
             className="pane__close-button-wrapper"

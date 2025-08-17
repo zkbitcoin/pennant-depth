@@ -62,7 +62,7 @@ export type PriceChartProps<A> = {
   /**
    * Override the default tooltip.
    */
-  tooltip?: (props: CustomTooltipProps<A>) => JSX.Element;
+  tooltip?: (props: CustomTooltipProps<A>) => React.ReactNode;
 };
 
 /**

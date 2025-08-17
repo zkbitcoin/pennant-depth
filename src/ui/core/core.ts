@@ -61,14 +61,15 @@ function getCandlePadding(isSimple: boolean, intervalWidth: number) {
 export type Panes<T> = { [id: string]: T };
 
 type ChartPane = {
-  id: string;
-  ref: React.RefObject<HTMLDivElement>;
-  data: any[];
-  renderableElements: RenderableElement[];
-  yEncodingFields: string[];
-  labels: RenderableHTMLElement[];
-  labelLines: RenderableElement[];
+    id: string;
+    ref: React.RefObject<HTMLDivElement | null>; // allow null
+    data: any[];
+    renderableElements: RenderableElement[];
+    yEncodingFields: string[];
+    labels: RenderableHTMLElement[];
+    labelLines: RenderableElement[];
 };
+
 
 /**
  * The Core class renders multiple plot areas which share a common x-axis.

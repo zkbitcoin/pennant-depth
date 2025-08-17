@@ -2,6 +2,9 @@ import "./x-axis-view.css";
 
 import { forwardRef } from "react";
 
+import { D3fcCanvas } from "../plot-container/D3fcWrappers";
+import { D3fcSVG } from "../plot-container/D3fcWrappers";
+
 export type XAxisViewProps = {
   simple: boolean;
 };
@@ -17,8 +20,8 @@ export const XAxisView = forwardRef<HTMLDivElement, XAxisViewProps>(
           visibility: simple ? "hidden" : "visible",
         }}
       >
-        <d3fc-canvas class="x-axis" use-device-pixel-ratio />
-        <d3fc-svg class="x-axis-interaction" />
+        <D3fcCanvas className="x-axis" use-device-pixel-ratio />
+        <D3fcSVG className="x-axis-interaction" />
       </div>
     );
   },

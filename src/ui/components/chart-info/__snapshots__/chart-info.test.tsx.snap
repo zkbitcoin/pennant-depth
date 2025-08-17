@@ -2,14 +2,15 @@
 
 exports[`ChartInfo renders correctly 1`] = `
 <div
-  className="chart-info-wrapper"
+  class="chart-info-wrapper"
+  data-testid="chart-info-wrapper"
 >
   <div>
     <span>
       00:00 01 Mar 2021
     </span>
     <span
-      className="text-muted"
+      class="text-muted"
     >
        to 
     </span>

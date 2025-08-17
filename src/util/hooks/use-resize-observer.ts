@@ -48,7 +48,7 @@ function useResolvedElement<T extends HTMLElement>(
     callSubscriber();
   }, []);
   const lastReportedElementRef = useRef<T | null>(null);
-  const cleanupRef = useRef<SubscriberResponse | null>();
+    const cleanupRef = useRef<SubscriberResponse | null>(null);
 
   const callSubscriber = () => {
     let element = null;
@@ -120,7 +120,7 @@ function useResizeObserver<T extends HTMLElement>(
   onResizeRef.current = onResize;
 
   // Using a single instance throughout the hook's lifetime
-  const resizeObserverRef = useRef<ResizeObserver>();
+    const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
   const [size, setSize] = useState<{
     width?: number;

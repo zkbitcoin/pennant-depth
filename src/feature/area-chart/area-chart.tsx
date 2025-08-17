@@ -67,7 +67,7 @@ export type AreaChartProps<A> = {
   /**
    * Override the default tooltip.
    */
-  tooltip?: (props: CustomTooltipProps<A>) => JSX.Element;
+  tooltip?: (props: CustomTooltipProps<A>) => React.ReactNode;
 
   /**
    * Used to format values on x axis if numbers.
