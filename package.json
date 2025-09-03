@@ -172,6 +172,15 @@
     "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.1.1"
   },
   "resolutions": {
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "allotment/react": "19.1.1",
+    "allotment/react-dom": "19.1.1",
+    "react-popper/react": "19.1.1",
+    "react-popper/react-dom": "19.1.1",
+    "pretty-format/react": "19.1.1",
+    "use-resize-observer/react": "19.1.1",
+    "use-resize-observer/react-dom": "19.1.1",
     "d3-array": "2.3.3"
   },
   "packageManager": "yarn@4.9.2+sha512.1fc009bc09d13cfd0e19efa44cbfc2b9cf6ca61482725eb35bbc5e257e093ebf4130db6dfe15d604ff4b79efd8e1e8e99b25fa7d0a6197c9f9826358d4d65c3c"
