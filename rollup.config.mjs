@@ -12,49 +12,54 @@ const meta = JSON.parse(readFileSync("./package.json"));
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
 const globals = {
-  react: "React",
-  "react-dom": "ReactDOM",
+    react: "React",
+    "react-dom": "ReactDOM",
 };
 
-const config = {
-  input: "src/index.ts",
-  external: [/@babel\/runtime/, ...Object.keys(globals)],
-  output: [
-    {
-      file: meta.main,
-      format: "es",
-      globals,
-      plugins: [
-        getBabelOutputPlugin({
-          presets: ["@babel/preset-env"],
+export default {
+    input: "src/index.ts",
+    external: [/@babel\/runtime/, ...Object.keys(globals)],
+    output: [
+        {
+            file: "dist/index.cjs.js",
+            format: "cjs",
+            sourcemap: true,
+            globals,
+        },
+        {
+            file: "dist/index.esm.js",
+            format: "esm",
+            sourcemap: true,
+            globals,
+            plugins: [
+                getBabelOutputPlugin({
+                    presets: ["@babel/preset-env"],
+                }),
+            ],
+        },
+    ],
+    plugins: [
+        tsConfigPaths(),
+        nodeResolve({ extensions }),
+        commonjs(),
+        postcss({
+            autoModules: true,
+            extract: path.resolve("dist/style.css"),
         }),
-      ],
-    },
-  ],
-  plugins: [
-    tsConfigPaths(),
-    nodeResolve({ extensions }),
-    commonjs(),
-    postcss({
-      autoModules: true,
-      extract: path.resolve("dist/style.css"),
-    }),
-    babel({
-      extensions,
-      plugins: ["@babel/plugin-transform-runtime"],
-      presets: [
-        [
-          "@babel/preset-react",
-          {
-            runtime: "automatic",
-          },
-        ],
-        ["@babel/preset-typescript", { allExtensions: true, isTSX: true }],
-      ],
-      babelHelpers: "runtime",
-    }),
-    terser({ mangle: false }),
-  ],
+        babel({
+            extensions,
+            plugins: ["@babel/plugin-transform-runtime"],
+            presets: [
+                [
+                    "@babel/preset-react",
+                    {
+                        runtime: "automatic", // modern JSX transform
+                    },
+                ],
+                ["@babel/preset-typescript", { allExtensions: true, isTSX: true }],
+            ],
+            babelHelpers: "runtime",
+        }),
+        terser({ mangle: false }),
+    ],
 };
-
-export default config;
